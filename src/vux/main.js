@@ -16,8 +16,6 @@ VUX.storage = new Storage();
 //全局使用Utils
 VUX.utils = Utils;
 
-//全局使用swiper轮播图插件
-VUX.swiper = window.swiper;
 
 //初始化页面的相对根尺寸并设置初始化参数
 (function(doc, win){
@@ -52,7 +50,7 @@ VUX.swiper = window.swiper;
 
 //自定义过滤器
 Object.keys(filter).forEach(function(k) {
-  Vue.filter(k, filter[k]);
+	Vue.filter(k, filter[k]);
 });
 
 //启动路由

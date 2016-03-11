@@ -10,14 +10,14 @@ var dep = {
     'window.jQuery': 'jquery'
 }
 
-//全局第三方库
+//全局第三方依赖库
 var libs = [
         'Vue', 
         'vue-router', 
         'jquery', 
         './src/vux/libs/jquery.finger', 
         './src/vux/libs/device',
-        './src/vux/libs/swiper'
+        './src/plugins'
     ]
 
 var plugins = [

@@ -1,4 +1,4 @@
-;(function () {
+export default (function () {
 
     function Swiper(options) {
         this.version = '1.4.1';
@@ -14,13 +14,30 @@
         this._eventHandlers = {};
 
         this.$container = document.querySelector(this._options.container);
+        this.$wrap = this.$container.parentNode;
         this.$items = this.$container.querySelectorAll(this._options.item);
         this.count = this.$items.length;
 
         this._width = this.$container.offsetWidth;
 
+        this._options.showState && this._dot();
+
         this._init();
         this._bind();
+    }
+
+    Swiper.prototype._dot = function () {
+        var dotArr = [];
+        var dotCon = document.createElement('div');
+        dotCon.className = 'dotCon';
+        for(var i = 0; i < this.count; i++){
+            var dot = document.createElement('i');
+            i == 0 ? dot.className = 'active' : null;
+            dotArr[i] = dot;
+            dotCon.appendChild(dot);
+        }
+        this.$wrap.appendChild(dotCon);
+        this.dotArr = dotArr;
     }
 
     Swiper.prototype._init = function () {
@@ -37,6 +54,7 @@
         });
 
         me._activate(0);
+        me.autoplay();
     };
 
     Swiper.prototype._bind = function () {
@@ -76,6 +94,14 @@
 
             me._show(me._current);
 
+            Array.prototype.forEach.call(me.dotArr, function (itm, i){
+                if(me._current == i){
+                    me.dotArr[i].className = 'active';
+                }else{
+                    me.dotArr[i].className = '';
+                }
+            })
+
         }, false);
 
         this.$container.addEventListener('transitionEnd', function (e) {
@@ -110,10 +136,12 @@
 
     Swiper.prototype._activate = function (index){
         var clazz = this._options.activeClass;
+        var swipedFn = this._options.swipedFn || null;
         Array.prototype.forEach.call(this.$items, function ($item, key){
             $item.classList.remove(clazz);
             if (index === key) {
                 $item.classList.add(clazz);
+                swipedFn && swipedFn(key);
             }
         });
     };
@@ -159,6 +187,30 @@
         return this;
     };
 
+    Swiper.prototype.autoplay = function(){
+        var me = this;
+        var wrap = me.$wrap;
+        var delay = me._options.during || 3000;
+        var flip = function(){
+            me.playTimer && clearTimeout(me.playTimer);
+            me.playTimer = setTimeout(function(){
+                me._current + 2 > me.count ? me.go(0) : me.next();
+                flip();
+            }, delay)
+        };
+        flip();
+        wrap.addEventListener('touchstart', function(){
+            clearTimeout(me.playTimer);
+        }, false);
+        wrap.addEventListener('touchend', function(){
+            flip();
+        }, false)
+    }
+
+    Swiper.prototype.stop = function(){
+        clearTimeout(this.playTimer);
+    }
+
     function extend(target, source) {
         for (var key in source) {
             target[key] = source[key];
@@ -169,51 +221,6 @@
 
     function noop() {}
 
-    //二次封装
-    window.swiper = function(opt){
-        var sw = new Swiper(opt);
-        var con = sw.$container.parentNode;
-        var dotNumber = sw.count;
+    return Swiper 
 
-        if(opt.showState){
-            var dotArr = [];
-            var dotCon = document.createElement('div');
-            dotCon.className = 'dotCon';
-            for(var i = 0; i < dotNumber; i++){
-                var dot = document.createElement('i');
-                i == 0 ? dot.className = 'active' : null;
-                dotArr[i] = dot;
-                dotCon.appendChild(dot);
-            }
-            con.appendChild(dotCon);
-            sw.on('swiped', function(prev, current){
-                dotArr.forEach(function(e, i){
-                    i == current ? e.className = 'active' : e.className = ''
-                })
-                if(opt.swipedFn) opt.swipedFn(current);
-            })
-        }
-
-        if(opt.autoplay){
-            var playTimer,
-                delay = opt.during || 3000,
-                flip = function(){
-                    playTimer && clearTimeout(playTimer);
-                    playTimer = setTimeout(function(){
-                        sw._current + 2 > dotNumber ? sw.go(0) : sw.next();
-                        flip()
-                    }, delay)
-                };
-            flip();
-            con.addEventListener('touchstart', function(){
-                clearTimeout(playTimer);
-            }, false);
-            con.addEventListener('touchend', function(){
-                flip();
-            }, false)
-        }
-
-        return sw
-    } 
-
-}).call(this);
+})()
