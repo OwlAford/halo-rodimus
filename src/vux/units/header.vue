@@ -1,0 +1,89 @@
+<template>
+  <header v-show="showState">
+      <div class="header">
+        <div class="title" v-el:header-title>{{title}}</div>
+        <div class="left" v-el:header-left></div>
+        <div class="right" v-el:header-right></div>
+      </div>
+  </header>
+</template>
+<style>
+header{width:100%; height:0.8rem;}
+header .header{width:100%; height:0.8rem; background-color:#313638; color:#fff; position:fixed; left:0; top:0; z-index:999; line-height:0.8rem;}
+header .title{text-align:center;}
+header .left,
+header .right{position:absolute; top:0; right:0.1rem;}
+header .left{left:0.1rem;}
+header .left i{padding-left:0.46rem;}
+header .right i{padding-right:0.46rem;}
+header .left i:after{left:0;}
+header i:after{font-size:0.36rem; position:absolute; right:0; top:50%; margin-top:-0.18rem;}
+header .back:after{content:'\e602';}
+</style>
+<script>
+
+export default {
+  name: 'AppHeader',
+  data () {
+    return {
+      showState: true,
+      title: '首页'
+    }
+  },
+  ready () {
+    var view = this;
+    var elems = view.$els;
+    var headerLeft = $(elems.headerLeft);
+    var headerRight = $(elems.headerRight);
+
+    //定义全局控制显示隐藏头部方法,传入参数为布尔值为显示状态
+    //true为显示，false为隐藏
+    VUX.showHeader = function(s){
+      view.showState = VUX.headerShowState = s
+    };
+
+    //定义头部功能按钮模板
+    var templates = {
+      back: '<i class="back">返回</i>',
+      cancel: '<span>取消</span>'
+    }
+    
+    // 清除头部按钮
+    // 'left', 'right'分别代表左按钮和右按钮,若不设置则为全部清空
+    VUX.clearHeaderBtn = function(part){
+      (part == 'right' || !part) && headerRight.empty();
+      (part == 'left' || !part) && headerLeft.empty();
+    }
+
+    /* ## 定义全局控制头部
+     *
+     * @ param --> title 头部标题
+     * @ param --> leftTpl, rightTpl 为按钮默认片段模板名或者自定义html片段，不可为纯文本
+     * @ param --> leftFn, rightFn 为按钮绑定方法, back对应模板默认为返回事件
+     */
+    VUX.setHeader = function(opt){
+      view.title = opt.title;
+      var getTpl = function(t){
+        var tpl;
+        (new RegExp(/<[^>]+>/)).test(t) ? tpl = t : tpl = templates[t];
+        return tpl;
+      }
+      var insertDom = function(tpl, fn, parent){
+        $(getTpl(tpl)).on('tap', function(){
+          if(fn) fn();
+          tpl == 'back' && history.back();
+        }).appendTo(parent); 
+      }
+      if(opt.leftTpl){
+        headerLeft.empty();
+        insertDom(opt.leftTpl, opt.leftFn, headerLeft);
+      } 
+      if(opt.rightTpl){
+        headerRight.empty();
+        insertDom(opt.rightTpl, opt.rightFn, headerRight);
+      }
+    }
+
+  }
+}
+</script>
