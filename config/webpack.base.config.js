@@ -6,8 +6,8 @@ var dep = {
     Vue: 'Vue',
     Router: 'vue-router',
     $: "jquery",
-    jQuery: "jquery",
-    "window.jQuery": "jquery"
+    jQuery: 'jquery',
+    'window.jQuery': 'jquery'
 }
 
 //全局第三方库
@@ -16,7 +16,8 @@ var libs = [
         'vue-router', 
         'jquery', 
         './src/vux/libs/jquery.finger', 
-        './src/vux/libs/device'
+        './src/vux/libs/device',
+        './src/vux/libs/swiper'
     ]
 
 var plugins = [

@@ -1,14 +1,19 @@
 <template>
   <div>
+    <div class="swiper-wrap">
+      <div class="swiper" id="swiper1">
+        <div class="item"><img src="../assets/img/view1.jpg"></div>
+        <div class="item"><img src="../assets/img/view2.png"></div>
+        <div class="item"><img src="../assets/img/view1.jpg"></div>
+        <div class="item"><img src="../assets/img/view2.png"></div>
+      </div>    
+    </div>
     <button id="btn">跳转</button>
     <button id="dialog">按钮测试dialog</button>
   </div>
 </template>
-<style>
-.dot:after{content:'\e600'}
-</style>
-<script>
 
+<script>
 
 export default {
   name: 'home',
@@ -30,18 +35,23 @@ export default {
    
   },
   ready () {
+    var view = this;
     VUX.clearHeaderBtn();
     VUX.setHeader({
-      title: '首页',
-      // leftTpl: '<span>左边</span>',
-      // leftFn: function(){
-      //   console.log('你点击了左边');
-      // },
-      // rightTpl: '<span>右边</span>',
-      // rightFn:function(){
-      //   console.log('你点击了右边');
-      // }
+      title: '首页'
     })
+
+    //轮播图展示
+    VUX.swiper({
+      container: '#swiper1',
+      item: '.item',
+      showState: true,
+      autoplay: true,
+      // swipedFn: function(i){
+      //   console.log(i);
+      // }
+      //during: 5000
+    });
 
     $('#btn').on('tap', function(){
       VUX.router.go({

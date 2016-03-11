@@ -35,7 +35,7 @@ export default {
         text: '模拟加载完毕！',
         delay: 1000
       })
-    },5000)
+    },3000)
   },
 
   methods: {

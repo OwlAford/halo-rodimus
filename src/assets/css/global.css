@@ -60,6 +60,17 @@ i:after{font-family:iconfont; font-size:0.48rem; font-weight:400; font-style:nor
   100%{opacity:1; -webkit-transform:translate3d(-50%, -50%, 0); transform:translate3d(-50%, -50%, 0);}
 }
 
+@-webkit-keyframes fadeInUpDialog{
+  0%{opacity:0; -webkit-transform:translate3d(-50%, 100%, 0) scale3d(.5, .5, .5); transform:translate3d(-50%, 100%, 0) scale3d(.5, .5, .5);}
+  100%{opacity:1; -webkit-transform:translate3d(-50%, -50%, 0) scale3d(1, 1, 1); transform:translate3d(-50%, -50%, 0) scale3d(1, 1, 1);}
+}
+
+@keyframes fadeInUpDialog{
+  0%{opacity:0; -webkit-transform:translate3d(-50%, 100%, 0) scale3d(.5, .5, .5); transform:translate3d(-50%, 100%, 0) scale3d(.5, .5, .5);}
+  100%{opacity:1; -webkit-transform:translate3d(-50%, -50%, 0) scale3d(1, 1, 1); transform:translate3d(-50%, -50%, 0) scale3d(1, 1, 1);}
+}
+
+
 /* row & cell */
 .row{display:box; display:-webkit-box;}
 .row >.cell{-webkit-box-flex:1; box-flex:1;}
@@ -73,7 +84,7 @@ i.toast.success:after{content:'\e617';}
 
 /* dialog */
 .dialog{width:100%; height:100%; position:fixed; left:0; top:0; z-index:9999;}
-.dialog .dialogBox{position:absolute; left:50%; top:50%; transform:translate3d(-50%, -50%, 0); -webkit-transform:translate3d(-50%, -50%, 0); width:4.8rem; background-color:#fff; box-shadow:0 8px 38px -5px rgba(0,0,0,.28); border-radius:0.1rem; overflow:hidden; animation:fadeInUpToast .3s; -webkit-animation:fadeInUpToast .3s;}
+.dialog .dialogBox{position:absolute; left:50%; top:50%; transform:translate3d(-50%, -50%, 0); -webkit-transform:translate3d(-50%, -50%, 0); width:4.8rem; background-color:#fff; box-shadow:0 8px 38px -5px rgba(0,0,0,.28); border-radius:0.1rem; overflow:hidden; animation:fadeInUpDialog .3s; -webkit-animation:fadeInUpDialog .3s;}
 .dialogBox .title{text-align:center; padding:0.2rem;}
 .dialogBox .content{min-height:0.8rem; color:#666; font-size:0.26rem; padding:0 0.2rem; white-space:normal; word-break:break-all;}
 .dialogBox .btnGrp{width:100%; border-width:1px 0 0; display:box; display:-webkit-box;}
@@ -82,9 +93,9 @@ i.toast.success:after{content:'\e617';}
 .dialogBox .btnGrp .btn:nth-child(2){border-width:0 0 0 1px;}
 
 /* loader */
-.dialog .wrap{width:60px; height:60px; padding:15px; background-color:rgba(0,0,0,.5); border-radius:8px; position:absolute; left:50%; top:50%; transform:translate3d(-50%, -50%, 0); -webkit-transform:translate3d(-50%, -50%, 0);}
+.dialog .wrap{width:0.96rem; height:0.96rem; padding:0.24rem; background-color:rgba(0,0,0,.5); border-radius:8px; position:absolute; left:50%; top:50%; transform:translate3d(-50%, -50%, 0); -webkit-transform:translate3d(-50%, -50%, 0);}
 
-.spinner{width:30px; height:30px; box-sizing:border-box; border:solid 3px transparent; border-top-color:#FFF; border-left-color:#FFF; border-radius:50%; -webkit-animation:nprogress-spinner 600ms linear infinite; animation:nprogress-spinner 600ms linear infinite; position:absolute;}
+.spinner{width:0.48rem; height:0.48rem; box-sizing:border-box; border:solid 0.06rem transparent; border-top-color:#FFF; border-left-color:#FFF; border-radius:50%; -webkit-animation:nprogress-spinner 600ms linear infinite; animation:nprogress-spinner 600ms linear infinite; position:absolute;}
 
 @-webkit-keyframes nprogress-spinner{
   0%   {-webkit-transform:rotate(0deg);}

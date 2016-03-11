@@ -21,6 +21,7 @@
 </template>
 
 <style src="../../assets/css/global.css"></style>
+<style src="../../assets/css/swiper.css"></style>
 
 <script>
 import AppHeader from './header.vue'
@@ -64,7 +65,6 @@ export default {
       var time = opt.delay || 3000;
       var clsName = 'toast ';
       if(opt.text.length > 18) clsName += 'break ';
-      console.log(opt.text.length);
       if(opt.type) clsName += opt.type;
       toastEl.textContent = opt.text;
       toastEl.className = clsName;
