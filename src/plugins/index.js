@@ -1,3 +1,5 @@
+import './device'
+import './jquery.finger'
 import Swiper from './Swiper'
 
 (function(){

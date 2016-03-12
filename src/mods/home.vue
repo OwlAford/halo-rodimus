@@ -8,7 +8,7 @@
         <div class="item"><img src="../assets/img/view2.png"></div>
       </div>    
     </div>
-    <button id="btn">跳转</button>
+    <button id="btn">跳转1</button>
     <button id="dialog">按钮测试dialog</button>
   </div>
 </template>

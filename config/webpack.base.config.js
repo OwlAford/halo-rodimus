@@ -15,8 +15,6 @@ var libs = [
         'Vue', 
         'vue-router', 
         'jquery', 
-        './src/vux/libs/jquery.finger', 
-        './src/vux/libs/device',
         './src/plugins'
     ]
 
