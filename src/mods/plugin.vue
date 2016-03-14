@@ -1,17 +1,20 @@
 <template>
-  <div>hello！我是plugin页</div>
+  <div id="picker">点击选取数字</div>
+  <div id="datetime">点击选取时间</div>
+  <div class="vux-datetime-value">{{value}}</div>
   <div class="mychart" v-el:chart></div>
 </template>
 <style>
 .mychart{width:100%; height:300px;}
 </style>
 <script>
+
 export default {
   name: 'plugin',
 
   data () {
     return {
-      
+      value: '请选择时间'
     }
   },
 
@@ -57,6 +60,28 @@ export default {
             data: [5, 20, 36, 10, 10, 20]
         }]
     });
+
+    //调用滚动选择插件
+    VUX.scroller('#picker', {
+      data: [1,2,3,4,5],
+      defaultValue: 2,
+      onSelect: function (value) {
+        console.log(value)
+      }
+    })
+
+    //调用滚动选择日期插件
+    VUX.datePicker({
+      trigger: '#datetime',
+      format: 'YYYY-MM-DD-HH-II',
+      value: '',
+      confirmText: '确定',
+      cancelText:'取消',
+      onConfirm: function (value) {
+        console.log(value);
+        view.value = value;
+      }
+    })
 
   },
 

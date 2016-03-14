@@ -22,8 +22,11 @@
 
 <style src="../../assets/css/global.css"></style>
 <style src="../../assets/css/swiper.css"></style>
+<style src="../../assets/css/scroller.css"></style>
+<style src="../../assets/css/datetimepicker.css"></style>
 
 <script>
+//import '../../assets/css'
 import AppHeader from './header.vue'
 import AppFooter from './footer.vue'
 

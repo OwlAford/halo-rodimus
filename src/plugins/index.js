@@ -1,6 +1,8 @@
 import './device'
 import './jquery.finger'
 import Swiper from './Swiper'
+import Scroller from './scroller'
+import DatePicker from './datetimepicker'
 
 // 引入 ECharts 主模块
 import Echarts from 'echarts/lib/echarts';
@@ -21,7 +23,15 @@ import 'echarts/lib/chart/bar';
             return new Swiper(opt)
         },
 
-        echarts: Echarts
+        echarts: Echarts,
+
+        scroller: function(elem, options){
+            return new Scroller(elem, options)
+        },
+
+        datePicker: function(options){
+            return new DatePicker(options)
+        }
         
     }
 
