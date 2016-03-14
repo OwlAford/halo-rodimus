@@ -17,23 +17,7 @@
 
 export default {
   name: 'home',
-  props: {
-   
-  },
-  data () {
-    return {
-      
-    }
-  },
-  events: {
-    
-  },
-  beforeDestroy () {
-    
-  },
-  destroyed () {
-   
-  },
+
   ready () {
     var view = this;
     VUX.clearHeaderBtn();
@@ -45,7 +29,7 @@ export default {
     VUX.swiper({
       container: '#swiper1',
       item: '.item',
-      showState: true,
+      showstate: true,
       autoplay: true,
       // swipedFn: function(i){
       //   console.log(i);
@@ -88,9 +72,7 @@ export default {
       })
     })
 
-  },
-  methods: {
-    
   }
+  
 }
 </script>

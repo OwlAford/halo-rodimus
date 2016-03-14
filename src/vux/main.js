@@ -1,8 +1,8 @@
 import App from './units/app.vue'
 import routerMap from './routers'
-import filter from './kit/filters'
-import Storage from './kit/storage'
-import Utils from './kit/utils'
+import filter from './libs/filters'
+import Storage from './libs/storage'
+import Utils from './libs/utils'
 
 //定义全局变量空间VUX
 window.VUX = window.VUX || {};

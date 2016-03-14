@@ -20,7 +20,7 @@ export default (function () {
 
         this._width = this.$container.offsetWidth;
 
-        this._options.showState && this._dot();
+        this._options.showstate && this._dot();
 
         this._init();
         this._bind();
