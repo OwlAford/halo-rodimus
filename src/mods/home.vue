@@ -2,10 +2,10 @@
   <div>
     <div class="swiper-wrap">
       <div class="swiper" id="swiper1">
-        <div class="item"><img src="../assets/img/view1.jpg"></div>
-        <div class="item"><img src="../assets/img/view2.png"></div>
-        <div class="item"><img src="../assets/img/view1.jpg"></div>
-        <div class="item"><img src="../assets/img/view2.png"></div>
+        <div class="item"><img src="../assets/img/v1.jpg"></div>
+        <div class="item"><img src="../assets/img/v2.jpg"></div>
+        <div class="item"><img src="../assets/img/v1.jpg"></div>
+        <div class="item"><img src="../assets/img/v2.jpg"></div>
       </div>    
     </div>
     <button id="btn">跳转1</button>
@@ -29,12 +29,12 @@ export default {
     VUX.swiper({
       container: '#swiper1',
       item: '.item',
-      showstate: true,
+      observer: true,
       autoplay: true,
-      // swipedFn: function(i){
-      //   console.log(i);
-      // }
-      //during: 5000
+      onSwiped: function(i){
+        console.log(i);
+      },
+      during: 3000
     });
 
     $('#btn').on('tap', function(){
