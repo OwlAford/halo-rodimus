@@ -89,6 +89,7 @@ export default {
      * okFn     --> 确定按钮绑定事件
      * cancelFn --> 取消按钮绑定事件
      */
+    VUX.dialogOk = VUX.dialogCancel = function(){};
     VUX.dialog = function(opt){
       view.dialogtitle = opt.title || '提示';
       view.dialogcontent = opt.content || '暂无提示';
@@ -97,12 +98,12 @@ export default {
       VUX.dialogOk = function(){
         if (opt.okFn) opt.okFn();
         view.dialogState = false;
-        VUX.dialogOk = null;
+        VUX.dialogOk = function(){};
       }
       VUX.dialogCancel = function(){
         if (opt.cancelFn) opt.cancelFn();
         view.dialogState = false;
-        VUX.dialogCancel = null;
+        VUX.dialogCancel = function(){};
       }
 
     }
