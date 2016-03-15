@@ -63,6 +63,25 @@ i:after{font-family:iconfont; font-size:0.48rem; font-weight:400; font-style:nor
   100%{opacity:1; -webkit-transform:translate3d(-50%, -50%, 0) scale3d(1, 1, 1); transform:translate3d(-50%, -50%, 0) scale3d(1, 1, 1);}
 }
 
+@-webkit-keyframes fadeIn{
+  0%{opacity:0;}
+  100%{opacity:1;}
+}
+
+@keyframes fadeIn{
+  0%{opacity:0;}
+  100%{opacity:1;}
+}
+
+@-webkit-keyframes fadeOut{
+  0%{opacity:1;}
+  100%{opacity:0;}
+}
+
+@keyframes fadeOut{
+  0%{opacity:1;}
+  100%{opacity:0;}
+}
 
 /* row & cell */
 .row{display:box; display:-webkit-box;}

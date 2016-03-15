@@ -3,7 +3,7 @@ var formater = require('./format');
 
 var MASK_TEMPLATE = '<div class="dp-mask"></div>';
 
-var TEMPLATE = '<div class="dp-container" style="display:none"> \
+var TEMPLATE = '<div class="dp-container"> \
   <div class="dp-header"> \
     <div class="dp-item dp-left" data-role="cancel">cancel</div> \
     <div class="dp-item dp-center"></div> \
@@ -58,6 +58,13 @@ var DEFAULT_CONFIG = {
   confirmText: '确定',
   cancelText: '取消'
 };
+
+function later(fn, delay){
+  var timer = setTimeout(function(){
+    fn();
+    clearTimeout(timer);
+  }, delay)
+}
 
 function each(obj, fn) {
   for (var key in obj) {
@@ -151,11 +158,7 @@ function renderScroller(el, data, value, fn) {
 
 function showMask() {
   if (MASK) {
-    MASK.style.display = 'block';
-    var timer = setTimeout(function () {
-      MASK.style.opacity = 0.5;
-      clearTimeout(timer);
-    }, 30);
+    MASK.classList.add('show');
     return;
   }
 
@@ -163,8 +166,8 @@ function showMask() {
   BODY.appendChild(MASK);
 
   setTimeout(function () {
-    MASK && (MASK.style.opacity = 0.5);
-  }, 0);
+    MASK && MASK.classList.add('show');
+  }, 30);
 
   $(MASK).click(function () {
     CURRENT_PICKER && CURRENT_PICKER.hide();
@@ -175,14 +178,11 @@ function hideMask() {
   if (!MASK) {
     return;
   }
-
-  MASK.style.opacity = 0;
-
-  var timer = setTimeout(function () {
-    MASK && (MASK.style.display = 'none');
-    //hideMaskTimer = null;
-    clearTimeout(timer);
-  }, SHOW_ANIMATION_TIME);
+  MASK.classList.remove('show');
+  MASK.classList.add('hide');
+  later(function(){
+    MASK.classList.remove('hide');
+  },300)
 }
 
 function DatetimePicker(config) {
@@ -208,12 +208,6 @@ function DatetimePicker(config) {
 
 DatetimePicker.prototype = {
 
-  later: function(fn, delay){
-    var timer = setTimeout(function(){
-      fn();
-      clearTimeout(timer);
-    }, delay)
-  },
   show: function (value) {
     var self = this;
     var config = self.config;
@@ -228,7 +222,7 @@ DatetimePicker.prototype = {
     if (self.container) {
       self.container.style.display = 'block';
       self.container.className = 'dp-container dp-enter';
-      self.later(function(){
+      later(function(){
         self.container.className = 'dp-container';
       },30)
 
@@ -243,7 +237,7 @@ DatetimePicker.prototype = {
 
       self.container.style.display = 'block';
       self.container.className = 'dp-container dp-enter';
-      self.later(function(){
+      later(function(){
         self.container.className = 'dp-container';
       },30)
 
@@ -372,7 +366,7 @@ DatetimePicker.prototype = {
   hide: function () {
     var self = this;
     self.container.className = 'dp-container dp-leave';
-    self.later(function(){
+    later(function(){
       self.container.style.display = 'none';
       self.container.className = 'dp-container';
     },300)
