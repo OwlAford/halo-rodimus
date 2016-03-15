@@ -7,9 +7,9 @@
     <div class="dialogBox">
       <div class="title">{{dialogtitle}}</div>
       <div class="content">{{dialogcontent}}</div>
-      <div class="btnGrp border-e2">
+      <div class="btnGrp ui-border-t">
         <button class="btn" onclick="VUX.dialogOk()">确定</button>
-        <button class="btn border-e2" v-show="cancelState" onclick="VUX.dialogCancel()">取消</button>
+        <button class="btn ui-border-l" v-show="cancelState" onclick="VUX.dialogCancel()">取消</button>
       </div>
     </div>
   </div>
@@ -21,6 +21,7 @@
 </template>
 
 <style src="../../assets/css/global.css"></style>
+<style src="../../assets/css/border.css"></style>
 <style src="../../assets/css/swiper.css"></style>
 <style src="../../assets/css/scroller.css"></style>
 <style src="../../assets/css/datetimepicker.css"></style>

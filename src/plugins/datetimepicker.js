@@ -3,7 +3,7 @@ var formater = require('./format');
 
 var MASK_TEMPLATE = '<div class="dp-mask"></div>';
 
-var TEMPLATE = '<div class="dp-container"> \
+var TEMPLATE = '<div class="dp-container" style="display:none"> \
   <div class="dp-header"> \
     <div class="dp-item dp-left" data-role="cancel">cancel</div> \
     <div class="dp-item dp-center"></div> \
@@ -55,8 +55,8 @@ var DEFAULT_CONFIG = {
   onConfirm: function () {},
   onShow: function () {},
   onHide: function () {},
-  confirmText: 'ok',
-  cancelText: 'cancel'
+  confirmText: '确定',
+  cancelText: '取消'
 };
 
 function each(obj, fn) {
@@ -152,7 +152,10 @@ function renderScroller(el, data, value, fn) {
 function showMask() {
   if (MASK) {
     MASK.style.display = 'block';
-    MASK.style.opacity = 0.5;
+    var timer = setTimeout(function () {
+      MASK.style.opacity = 0.5;
+      clearTimeout(timer);
+    }, 30);
     return;
   }
 
@@ -175,9 +178,10 @@ function hideMask() {
 
   MASK.style.opacity = 0;
 
-  setTimeout(function () {
+  var timer = setTimeout(function () {
     MASK && (MASK.style.display = 'none');
     //hideMaskTimer = null;
+    clearTimeout(timer);
   }, SHOW_ANIMATION_TIME);
 }
 
@@ -204,6 +208,12 @@ function DatetimePicker(config) {
 
 DatetimePicker.prototype = {
 
+  later: function(fn, delay){
+    var timer = setTimeout(function(){
+      fn();
+      clearTimeout(timer);
+    }, delay)
+  },
   show: function (value) {
     var self = this;
     var config = self.config;
@@ -217,6 +227,10 @@ DatetimePicker.prototype = {
 
     if (self.container) {
       self.container.style.display = 'block';
+      self.container.className = 'dp-container dp-enter';
+      self.later(function(){
+        self.container.className = 'dp-container';
+      },30)
 
       each(TYPE_MAP, function (type) {
         self[type + 'Scroller'] && self[type + 'Scroller'].select(trimZero(newValueMap[type]), false);
@@ -228,6 +242,10 @@ DatetimePicker.prototype = {
       BODY.appendChild(container);
 
       self.container.style.display = 'block';
+      self.container.className = 'dp-container dp-enter';
+      self.later(function(){
+        self.container.className = 'dp-container';
+      },30)
 
       container.addEventListener('touchstart', function (e) {
         //e.preventDefault();
@@ -353,7 +371,11 @@ DatetimePicker.prototype = {
 
   hide: function () {
     var self = this;
-    self.container.style.display = 'none';
+    self.container.className = 'dp-container dp-leave';
+    self.later(function(){
+      self.container.style.display = 'none';
+      self.container.className = 'dp-container';
+    },300)
 
     hideMask();
 

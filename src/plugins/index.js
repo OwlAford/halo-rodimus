@@ -3,6 +3,7 @@ import './jquery.finger'
 import Swiper from './Swiper'
 import Scroller from './scroller'
 import DatePicker from './datetimepicker'
+import Address from './area.json'
 
 // 引入 ECharts 主模块
 import Echarts from 'echarts/lib/echarts';
@@ -20,7 +21,7 @@ import 'echarts/lib/chart/bar';
     var plugins = {
 
         swiper: function(opt){
-            return new Swiper(opt)
+             return new Swiper(opt)
         },
 
         echarts: Echarts,
@@ -31,7 +32,9 @@ import 'echarts/lib/chart/bar';
 
         datePicker: function(options){
             return new DatePicker(options)
-        }
+        },
+
+        address: Address
         
     }
 

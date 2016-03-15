@@ -15,13 +15,6 @@ body{background-color:#f9f9f9; font-size:0.28rem; width:100%;}
 @font-face{font-family:"iconfont"; src:url('../font/iconfont.ttf') format('truetype');} 
 i:after{font-family:iconfont; font-size:0.48rem; font-weight:400; font-style:normal; line-height:1; display:inline-block; text-decoration:none; -webkit-font-smoothing:antialiased;}
 
-/* 1px border line */
-.border,.border-e2{border-width:1px 0; border-image:url("../svg/rto2/e.svg") 2 stretch;}
-.border-e2{border-image-source:url("../svg/rto2/e2.svg");}
-@media only screen and (-webkit-min-device-pixel-ratio:3){
-	.border{border-image-source:url("../svg/rto3/e.svg");}
-	.border-e2{border-image-source:url("../svg/rto3/e2.svg");}
-}
 
 /* router view transition */
 .switch-enter{animation:switch-in .2s;}
@@ -87,10 +80,9 @@ i.toast.success:after{content:'\e617';}
 .dialog .dialogBox{position:absolute; left:50%; top:50%; transform:translate3d(-50%, -50%, 0); -webkit-transform:translate3d(-50%, -50%, 0); width:4.8rem; background-color:#fff; box-shadow:0 8px 38px -5px rgba(0,0,0,.28); border-radius:0.1rem; overflow:hidden; animation:fadeInUpDialog .3s; -webkit-animation:fadeInUpDialog .3s;}
 .dialogBox .title{text-align:center; padding:0.2rem;}
 .dialogBox .content{min-height:0.8rem; color:#666; font-size:0.26rem; padding:0 0.2rem; white-space:normal; word-break:break-all;}
-.dialogBox .btnGrp{width:100%; border-width:1px 0 0; display:box; display:-webkit-box;}
+.dialogBox .btnGrp{width:100%; display:box; display:-webkit-box;}
 .dialogBox .btnGrp .btn{width:50%; font-size:0.26rem; color:#666; display:block; box-flex:1; -webkit-box-flex:1; padding:0.24rem;}
 .dialogBox .btnGrp .btn:active{background-color:#F8F8F8;}
-.dialogBox .btnGrp .btn:nth-child(2){border-width:0 0 0 1px;}
 
 /* loader */
 .dialog .wrap{width:0.96rem; height:0.96rem; padding:0.24rem; background-color:rgba(0,0,0,.5); border-radius:8px; position:absolute; left:50%; top:50%; transform:translate3d(-50%, -50%, 0); -webkit-transform:translate3d(-50%, -50%, 0);}
@@ -104,4 +96,30 @@ i.toast.success:after{content:'\e617';}
 @keyframes nprogress-spinner{
   0%   {transform:rotate(0deg);}
   100% {transform:rotate(360deg);}
+}
+
+/* Public Basic Styles */
+.vux-flexbox{
+  width: 100%;
+  text-align: left;
+  display: -webkit-box;
+  display: -o-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+}
+
+.vux-flexbox .vux-flexbox-item{
+  -webkit-box-flex: 1;
+  -o-box-flex: 1;
+  -ms-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  min-width: 20px;
+}
+
+.vux-flexbox .vux-flexbox-item:first-child{
+  margin-left: 0!important;
 }

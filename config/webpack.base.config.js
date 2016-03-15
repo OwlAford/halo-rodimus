@@ -76,11 +76,8 @@ module.exports = {
                     name: '[name].[ext]?mimetype=application/font-woff2'
                 }
             },{
-                test: /\.json(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "url",
-                query: {
-                    name: '[name].[ext]?mimetype=application/json'
-                }
+                test: /\.json$/,
+                loader: 'json'
             }
                   
         ]
