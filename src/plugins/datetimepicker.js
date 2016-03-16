@@ -179,9 +179,9 @@ function hideMask() {
     return;
   }
   MASK.classList.remove('show');
-  MASK.classList.add('hide');
+  MASK.classList.add('leave');
   later(function(){
-    MASK.classList.remove('hide');
+    MASK.classList.remove('leave');
   },300)
 }
 
@@ -220,11 +220,7 @@ DatetimePicker.prototype = {
     });
 
     if (self.container) {
-      self.container.style.display = 'block';
-      self.container.className = 'dp-container dp-enter';
-      later(function(){
-        self.container.className = 'dp-container';
-      },30)
+      self.container.classList.add('show');
 
       each(TYPE_MAP, function (type) {
         self[type + 'Scroller'] && self[type + 'Scroller'].select(trimZero(newValueMap[type]), false);
@@ -235,11 +231,7 @@ DatetimePicker.prototype = {
 
       BODY.appendChild(container);
 
-      self.container.style.display = 'block';
-      self.container.className = 'dp-container dp-enter';
-      later(function(){
-        self.container.className = 'dp-container';
-      },30)
+      self.container.classList.add('show');
 
       container.addEventListener('touchstart', function (e) {
         //e.preventDefault();
@@ -365,10 +357,10 @@ DatetimePicker.prototype = {
 
   hide: function () {
     var self = this;
-    self.container.className = 'dp-container dp-leave';
+    self.container.classList.remove('show');
+    self.container.classList.add('leave');
     later(function(){
-      self.container.style.display = 'none';
-      self.container.className = 'dp-container';
+      self.container.classList.remove('leave');
     },300)
 
     hideMask();

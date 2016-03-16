@@ -1,21 +1,22 @@
 <template>
-  <div>
-    <button v-el:throw>点击选取数字</button>
-    <div class="vux-flexbox">
-      <div class="vux-flexbox-item" v-el:picker1></div>
-      <div class="vux-flexbox-item" v-el:picker2></div>
-      <div class="vux-flexbox-item" v-el:picker3></div>
-    </div>
+  <div class="wrap1">
+    <button class="btn1" v-el:pop1>点击选择省市</button>
+    <button class="btn1" v-el:pop2>点击选择省市地</button>
+    <button class="btn1" v-el:datetime1>点击选取时间1</button>
+    <button class="btn1" v-el:datetime2>点击选取时间2</button>
+    <div class="time">所选时间显示为：{{value}}</div>
+    <div class="mychart" v-el:chart></div>
   </div>
-  <div v-el:datetime>点击选取时间</div>
-  <div class="vux-datetime-value">{{value}}</div>
-  <div class="mychart" v-el:chart></div>
 </template>
 <style>
+.wrap1{padding:10px;}
 .mychart{width:100%; height:300px;}
+.btn1{padding:12px; text-align:center; display:block; color:#FFF; background-color:#0094e8; width:100%; margin:10px 0; border-radius:4px;}
+.time{padding:10px; background-color:#eee; color:#999; margin:8px 0;}
 </style>
 <script>
 import filter from '../vux/libs/filters'
+import popPicker from '../plugins/poppicker'
 
 export default {
   name: 'plugin',
@@ -70,124 +71,52 @@ export default {
         }]
     });
 
-
-    var addr = VUX.address;
-
-    function getName(value){
-      var cur;
-      addr.forEach(function(e){
-        if(e.value === value){
-          return cur = e.name
-        }
-      });
-      return cur
-    }
-
-    function getChildren(value){
-      var col = [];
-      addr.forEach(function(e){
-        if(e.parent === value){
-          col.push(e);
-        }
-      });
-      return col
-    }
-
-    function getFirstColumn(data){
-      var col = [];
-      addr.forEach(function(e){
-        if(!e.parent || e.parent === 0){
-          col.push(e);
-        }
-      });
-      return col
-    }
-    var pozArr = [];
-    var province = getFirstColumn(addr);
-    var firstCity = getChildren(province[0].value);
-    var firstArea = getChildren(firstCity[0].value);
-    pozArr[0] = province[0].name;
-    pozArr[1] = firstCity[0].name;
-    pozArr[2] = firstArea[0].name;
-
-    console.log(pozArr);
-
-    // 调用滚动选择插件
-    view.scroller = [];
-    view.scroller[0] = VUX.scroller(els.picker1, {
-      data: province,
-      onSelect: function (value) {
-        pozArr[0] = getName(value);
-        var curCity = getChildren(value);
-        var firstArea = getChildren(curCity[0].value);
-        view.scroller[1].destroy();
-        pozArr[1] = curCity[0].name;
-        pozArr[2] = firstArea[0].name;
-        console.log(pozArr);
-        view.scroller[1] = VUX.scroller(els.picker2, {
-          data: curCity,
-          onSelect: function (value) {
-            pozArr[1] = getName(value);
-            var curArea = getChildren(value);
-            pozArr[2] = curArea[0].name;
-            view.scroller[2].destroy();
-            console.log(pozArr);
-            view.scroller[2] = VUX.scroller(els.picker3, {
-              data: curArea,
-              onSelect: function (value) {
-                pozArr[2] = getName(value);
-                console.log(pozArr);
-              }
-            })
-          }
+    //调用级联选择插件
+    view.ppicker1 = new popPicker({
+      data: [VUX.province, VUX.city],
+      onConfirm: function(data){
+        VUX.dialog({
+          title: '选择结果',
+          content: data.join('-'),
         })
-        view.scroller[2].destroy();
-        view.scroller[2] = VUX.scroller(els.picker3, {
-          data: firstArea,
-          onSelect: function (value) {
-            pozArr[2] = getName(value);
-            console.log(pozArr);
-          }
+      }
+    })
+    $(els.pop1).on('tap',function(){
+      view.ppicker1.show();
+    })
+
+    view.ppicker2 = new popPicker({
+      data: [VUX.province, VUX.city, VUX.county],
+      onConfirm: function(data){
+        VUX.dialog({
+          title: '选择结果',
+          content: data.join('-'),
         })
       }
     })
 
-    view.scroller[1] = VUX.scroller(els.picker2, {
-      data: firstCity,
-      onSelect: function (value) {
-        pozArr[1] = getName(value);
-        var curArea = getChildren(value);
-        pozArr[2] = curArea[0].name;
-        view.scroller[2].destroy();
-        console.log(pozArr);
-        view.scroller[2] = VUX.scroller(els.picker3, {
-          data: curArea,
-          onSelect: function (value) {
-            pozArr[2] = getName(value);
-            console.log(pozArr);
-          }
-        })
-      }
+    $(els.pop2).on('tap',function(){
+      view.ppicker2.show();
     })
 
-    view.scroller[2] = VUX.scroller(els.picker3, {
-      data: firstArea,
-      onSelect: function (value) {
-        pozArr[2] = getName(value);
-        console.log(pozArr);
-      }
-    })
-
-    $(view.$els.throw).on('click', function(){
-      alert(pozArr.join("-"));
-    })
 
     // 调用滚动选择日期插件
-    view.datePicker = VUX.datePicker({
-      trigger: els.datetime,
-      format: 'YYYY-MM-DD-HH-II',
+    view.datePicker1 = VUX.datePicker({
+      trigger: els.datetime1,
+      format: 'MM-DD',
       minYear: 1990,
       maxYear: 2050,
+      onConfirm: function (value) {
+        console.log(value);
+        view.value = value;
+      }
+    })
+    view.datePicker2 = VUX.datePicker({
+      trigger: els.datetime2,
+      //format: 'YYYY-MM-DD-HH-II',
+      format: 'YYYY-MM-DD',
+      minYear: 2000,
+      maxYear: 2020,
       onConfirm: function (value) {
         console.log(value);
         view.value = value;
@@ -196,12 +125,12 @@ export default {
 
   },
   beforeDestroy: function () {
-    for (var i = 0; i < 3; i++) {
-      this.scroller[i].destroy()
-      this.scroller[i] = null
-    }
-    this.datePicker.destroy();
-    this.datePicker = null;
+    // 页面跳转并销毁当前页面前，必须销毁已调用滚动插件
+    this.datePicker1.destroy();
+    this.datePicker2.destroy();
+    this.ppicker1.destroy();
+    this.ppicker2.destroy();
+    this.ppicker1 = this.ppicker2 = this.datePicker1 = this.datePicker2 = null;
   },
   methods: {
     

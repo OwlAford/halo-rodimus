@@ -1,5 +1,5 @@
 .swiper{-webkit-transition:all .3s ease; transition:all .3s ease; width:100%; overflow:hidden; display:box; display:-webkit-box; height:100%;}
-.swiper .item{position:relative; height:100%;}
+.swiper .item{position:relative; height:100%; overflow:hidden;}
 .swiper .item.active .animated{-webkit-animation-fill-mode:both; animation-fill-mode:both; opacity:1;}
 .swiper .item:not(.active) .animated{-webkit-animation:none; animation:none; opacity:0;}
 

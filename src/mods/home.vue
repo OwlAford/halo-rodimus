@@ -1,15 +1,17 @@
 <template>
   <div>
     <div class="swiper-wrap">
-      <div class="swiper" id="swiper1">
+      <div class="swiper" v-el:slider>
         <div class="item"><img src="../assets/img/v1.jpg"></div>
         <div class="item"><img src="../assets/img/v2.jpg"></div>
         <div class="item"><img src="../assets/img/v1.jpg"></div>
         <div class="item"><img src="../assets/img/v2.jpg"></div>
       </div>    
     </div>
-    <button id="btn">跳转1</button>
-    <button id="dialog">按钮测试dialog</button>
+    <div class="wrap1">
+      <button class="btn1" id="btn">点击跳转</button>
+      <button class="btn1" id="dialog">点击测试dialog</button>
+    </div>
   </div>
 </template>
 
@@ -20,15 +22,18 @@ export default {
 
   ready () {
     var view = this;
-    VUX.clearHeaderBtn();
+    var els = this.$els;
+
+    VUX.headerBtnEmpty();
     VUX.setHeader({
-      title: '首页'
+      title: '首页展示'
     })
 
     //轮播图展示
     VUX.swiper({
-      container: '#swiper1',
+      container: els.slider,
       item: '.item',
+      ratio: 640/360,
       observer: true,
       autoplay: true,
       onSwiped: function(i){

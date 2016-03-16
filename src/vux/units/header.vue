@@ -13,7 +13,7 @@ header .header{width:100%; height:0.8rem; background-color:#313638; color:#fff; 
 header .title{text-align:center;}
 header .left,
 header .right{position:absolute; top:0; right:0.1rem;}
-header .left{left:0.1rem;}
+header .left{left:0.1rem; right:auto;}
 header .left i{padding-left:0.46rem;}
 header .right i{padding-right:0.46rem;}
 header .left i:after{left:0;}
@@ -33,8 +33,8 @@ export default {
   ready () {
     var view = this;
     var elems = view.$els;
-    var headerLeft = $(elems.headerLeft);
-    var headerRight = $(elems.headerRight);
+    var headerLeft = elems.headerLeft;
+    var headerRight = elems.headerRight;
 
     //定义全局控制显示隐藏头部方法,传入参数为布尔值为显示状态
     //true为显示，false为隐藏
@@ -50,15 +50,27 @@ export default {
     
     // 清除头部按钮
     // 'left', 'right'分别代表左按钮和右按钮,若不设置则为全部清空
-    VUX.clearHeaderBtn = function(part){
-      (part == 'right' || !part) && headerRight.empty();
-      (part == 'left' || !part) && headerLeft.empty();
+    VUX.headerBtnEmpty = function(part){
+      if(part == 'right' || !part) headerRight.innerHTML = '';
+      if(part == 'left' || !part) headerLeft.innerHTML = '';
     }
+
+    // 定义全局左右按钮点击方法
+    VUX.headerBtnLeftFn = history.back;
+    VUX.headerBtnRightFn = VUX.noop;
+
+    // 左右按钮全局绑定事件
+    headerLeft.addEventListener('touchend', function(){
+      VUX.headerBtnLeftFn()
+    }, false);
+    headerRight.addEventListener('touchend', function(){
+      VUX.headerBtnRightFn()
+    }, false);
 
     /* ## 定义全局控制头部
      *
      * @ param --> title 头部标题
-     * @ param --> leftTpl, rightTpl 为按钮默认片段模板名或者自定义html片段，不可为纯文本
+     * @ param --> leftTpl, rightTpl 为按钮默认片段模板名或者自定义html片段(不可为纯文本)
      * @ param --> leftFn, rightFn 为按钮绑定方法, back对应模板默认为返回事件
      */
     VUX.setHeader = function(opt){
@@ -68,19 +80,27 @@ export default {
         (new RegExp(/<[^>]+>/)).test(t) ? tpl = t : tpl = templates[t];
         return tpl;
       }
-      var insertDom = function(tpl, fn, parent){
-        $(getTpl(tpl)).on('tap', function(){
-          if(fn) fn();
-          tpl == 'back' && history.back();
-        }).appendTo(parent); 
+      var insertDom = function(tpl, fn, side){
+        var parent;
+        side == 'left' ? parent = headerLeft : parent = headerRight;
+        parent.innerHTML = getTpl(tpl);
+        if(fn){
+          var callback = function(){
+            fn();
+            tpl == 'back' && history.back();
+          }
+          side == 'left' ? 
+          VUX.headerBtnLeftFn = callback : 
+          VUX.headerBtnRightFn = callback;
+        };
       }
       if(opt.leftTpl){
-        headerLeft.empty();
-        insertDom(opt.leftTpl, opt.leftFn, headerLeft);
+        headerLeft.innerHTML = '';
+        insertDom(opt.leftTpl, opt.leftFn, 'left');
       } 
       if(opt.rightTpl){
-        headerRight.empty();
-        insertDom(opt.rightTpl, opt.rightFn, headerRight);
+        headerRight.innerHTML = '';
+        insertDom(opt.rightTpl, opt.rightFn, 'right');
       }
     }
 

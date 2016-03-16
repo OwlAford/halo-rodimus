@@ -8,8 +8,8 @@
       <div class="title">{{dialogtitle}}</div>
       <div class="content">{{dialogcontent}}</div>
       <div class="btnGrp ui-border-t">
-        <button class="btn" onclick="VUX.dialogOk()">确定</button>
-        <button class="btn ui-border-l" v-show="cancelState" onclick="VUX.dialogCancel()">取消</button>
+        <button class="btn" v-show="cancelState" onclick="VUX.dialogCancel()">取消</button>
+        <button class="btn ui-border-l" onclick="VUX.dialogOk()">确定</button>
       </div>
     </div>
   </div>

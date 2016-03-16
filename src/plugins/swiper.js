@@ -7,6 +7,10 @@ export default (function () {
         return target;
     }
 
+    function getElement(expr) {
+      return (typeof expr == 'string') ? document.querySelector(expr) : expr;
+    }
+
     function noop(){}
 
     function Swiper(options){
@@ -18,6 +22,7 @@ export default (function () {
             item: '.item', 
             direction: 'vertical', 
             activeClass: 'active', 
+            ratio: null,
             observer: true,
             autoplay: true,
             threshold: 50, 
@@ -29,7 +34,7 @@ export default (function () {
         me.options = extend(me.default, options);
 
         me.running = false;
-        me.$container = document.querySelector(me.options.container);
+        me.$container = getElement(me.options.container);
         me.$wrap = me.$container.parentNode;
         me.$items = me.$container.querySelectorAll(me.options.item);
         me.count = me.$items.length;
@@ -85,8 +90,12 @@ export default (function () {
         me.width = me.$wrap.offsetWidth;
 
         var width = me.width;
-        var w = width * me.count;
-        me.$container.style.width = w + 'px';
+        me.$container.style.width = width * me.count + 'px';
+
+        var ratio = me.options.ratio;
+        if(ratio){
+            me.$container.style.height =  width/ratio + 'px';
+        } 
 
         Array.prototype.forEach.call(me.$items, function(el, key){
             el.style.width = width + 'px';

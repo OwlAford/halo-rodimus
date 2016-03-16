@@ -7,6 +7,9 @@ import Utils from './libs/utils'
 // 定义全局变量空间VUX
 window.VUX = window.VUX || {};
 
+// 定义一个全局空函数
+VUX.noop = function(){};
+
 // 设备信息保存至VUX
 VUX.device = device;
 

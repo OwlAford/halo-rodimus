@@ -3,7 +3,9 @@ import './jquery.finger'
 import Swiper from './Swiper'
 import Scroller from './scroller'
 import DatePicker from './datetimepicker'
-import Address from './area.json'
+import Province from './province.json'
+import City from './city.json'
+import County from './county.json'
 
 // 引入 ECharts 主模块
 import Echarts from 'echarts/lib/echarts';
@@ -31,10 +33,24 @@ import 'echarts/lib/chart/bar';
         },
 
         datePicker: function(options){
-            return new DatePicker(options)
+            var opt = {
+                yearRow: '{value}年',
+                monthRow: '{value}月',
+                dayRow: '{value}日',
+                hourRow: '{value}点',
+                minuteRow: '{value}分'
+            };
+            for(var key in options){
+                opt[key] = options[key];
+            }
+            return new DatePicker(opt)
         },
 
-        address: Address
+        province: Province,
+
+        city: City,
+
+        county: County
         
     }
 
