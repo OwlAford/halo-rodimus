@@ -10,9 +10,6 @@ window.VUX = window.VUX || {};
 // 定义一个全局空函数
 VUX.noop = function(){};
 
-// 设备信息保存至VUX
-VUX.device = device;
-
 // 实例化全局存储器
 VUX.storage = new Storage();
 
@@ -69,6 +66,7 @@ router.beforeEach(function () {
 	VUX.showHeader(true);
 	VUX.showFooter(true);
 	VUX.clearToast();
+	VUX.hideWaitPanel();
 });
 router.redirect({
   '*': '/home'

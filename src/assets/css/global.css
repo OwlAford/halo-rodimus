@@ -26,22 +26,22 @@ i:after{font-family:iconfont; font-size:0.48rem; font-weight:400; font-style:nor
 
 /* public animate */
 @-webkit-keyframes switch-in{
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0%{opacity:0;}
+  100%{opacity:1;}
 }
 @keyframes switch-in{
-  0% {opacity:0;}
-  100% {opacity:1;}
+  0%{opacity:0;}
+  100%{opacity:1;}
 }
 
 @-webkit-keyframes switch-out{
-  0% {opacity:1;}
-  100% {opacity:0;}
+  0%{opacity:1;}
+  100%{opacity:0;}
 }
 
 @keyframes switch-out{
-  0% {opacity:1;}
-  100% {opacity:0;}
+  0%{opacity:1;}
+  100%{opacity:0;}
 }
 
 @-webkit-keyframes fadeInUpToast{
@@ -109,14 +109,14 @@ i:after{font-family:iconfont; font-size:0.48rem; font-weight:400; font-style:nor
 .row >.cell{-webkit-box-flex:1; box-flex:1;}
 
 /* tosat */
-i.toast{padding:0.12rem 0.2rem 0.12rem 0.68rem; font-size:0.26rem; display:block; max-width:90%; background-color:rgba(0,0,0,.5); color:#fff; border-radius:0.08rem; z-index:9999; position:fixed; left:50%; top:50%; transform:translate3d(-50%, -50%, 0); -webkit-transform:translate3d(-50%, -50%, 0); animation:fadeInUpToast .3s; -webkit-animation:fadeInUpToast .3s; white-space:nowrap; overflow:hidden;}
+i.toast{padding:0.12rem 0.2rem 0.12rem 0.68rem; font-size:0.26rem; display:block; max-width:90%; background-color:rgba(0,0,0,.5); color:#fff; border-radius:0.08rem; z-index:999; position:fixed; left:50%; top:50%; transform:translate3d(-50%, -50%, 0); -webkit-transform:translate3d(-50%, -50%, 0); animation:fadeInUpToast .3s; -webkit-animation:fadeInUpToast .3s; white-space:nowrap; overflow:hidden;}
 i.toast.break{width:80%; white-space:normal;}
 i.toast:after{content:'\e619'; font-size:0.36rem; position:absolute; left:0.16rem; top:50%; margin-top:-0.16rem;}
 i.toast.error:after{content:'\e618';}
 i.toast.success:after{content:'\e617';}
 
 /* dialog */
-.dialog{width:100%; height:100%; position:fixed; left:0; top:0; z-index:9999;}
+.dialog{width:100%; height:100%; position:fixed; left:0; top:0; z-index:999;}
 .dialog .dialogBox{position:absolute; left:50%; top:50%; transform:translate3d(-50%, -50%, 0); -webkit-transform:translate3d(-50%, -50%, 0); width:4.8rem; background-color:#fff; box-shadow:0 8px 38px -5px rgba(0,0,0,.28); border-radius:0.1rem; overflow:hidden; animation:fadeInUpDialog .3s; -webkit-animation:fadeInUpDialog .3s;}
 .dialogBox .title{text-align:center; padding:0.2rem;}
 .dialogBox .content{min-height:0.8rem; color:#666; font-size:0.26rem; padding:0 0.2rem; white-space:normal; word-break:break-all;}
@@ -125,18 +125,28 @@ i.toast.success:after{content:'\e617';}
 .dialogBox .btnGrp .btn:active{background-color:#F8F8F8;}
 
 /* loader */
-.dialog .wrap{width:0.96rem; height:0.96rem; padding:0.24rem; background-color:rgba(0,0,0,.5); border-radius:8px; position:absolute; left:50%; top:50%; transform:translate3d(-50%, -50%, 0); -webkit-transform:translate3d(-50%, -50%, 0);}
+.dialog .wrap{width:0.96rem; height:0.96rem; margin:-0.48rem 0 0 -0.48rem; background-color:rgba(0,0,0,.6); border-radius:0.1rem; -webkit-border-radius:0.1rem; position:absolute; left:50%; top:50%;}
 
-.spinner{width:0.48rem; height:0.48rem; box-sizing:border-box; border:solid 0.06rem transparent; border-top-color:#FFF; border-left-color:#FFF; border-radius:50%; -webkit-animation:nprogress-spinner 600ms linear infinite; animation:nprogress-spinner 600ms linear infinite; position:absolute;}
+.spinner{
+  position:relative;
+  border-top:0.08rem solid rgba(255, 255, 255, 0.2);
+  border-right:0.08rem solid rgba(255, 255, 255, 0.2);
+  border-bottom:0.08rem solid rgba(255, 255, 255, 0.2);
+  border-left:0.08rem solid #ffffff;
+  -webkit-animation:spinner .8s infinite linear;
+  animation:spinner .8s infinite linear;
+}
+.spinner, .spinner:after{border-radius:50%; width:0.64rem; height:0.64rem; position:absolute;  left:50%; top:50%; margin:-0.32rem 0 0 -0.32rem;}
 
-@-webkit-keyframes nprogress-spinner{
-  0%   {-webkit-transform:rotate(0deg);}
-  100% {-webkit-transform:rotate(360deg);}
+@-webkit-keyframes spinner{
+  0%{-webkit-transform:rotate(0deg); transform:rotate(0deg);}
+  100%{-webkit-transform:rotate(360deg); transform:rotate(360deg);}
 }
-@keyframes nprogress-spinner{
-  0%   {transform:rotate(0deg);}
-  100% {transform:rotate(360deg);}
+@keyframes spinner{
+  0%{-webkit-transform:rotate(0deg); transform:rotate(0deg);}
+  100%{-webkit-transform:rotate(360deg); transform:rotate(360deg);}
 }
+
 
 /* Public Basic Styles */
 .vux-flexbox{width:100%; text-align:left; display:-webkit-box; display:-o-box; display:-ms-flexbox; display:-webkit-flex; display:flex; -webkit-box-align:center; -webkit-align-items:center;}

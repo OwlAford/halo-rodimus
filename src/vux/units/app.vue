@@ -13,7 +13,7 @@
       </div>
     </div>
   </div>
-  <div :class="{'dialog': loaderState, 'hide': !loaderState}">
+  <div :class="{'dialog': loaderState, 'hide': !loaderState}" v-el:dialog-load>
     <div class="wrap">
       <div class="spinner"><div class="spinner-icon"></div></div>
     </div>
@@ -27,7 +27,6 @@
 <style src="../../assets/css/datetimepicker.css"></style>
 
 <script>
-//import '../../assets/css'
 import AppHeader from './header.vue'
 import AppFooter from './footer.vue'
 
@@ -49,8 +48,17 @@ export default {
   
   ready () {
     var view = this;
-    var toastEl = this.$els.toast;
-    var dialogEl = this.$els.dialog;
+    var els = this.$els;
+    var toastEl = els.toast;
+    var dialogEl = els.dialog;
+    var dialogLoadEl = els.dialogLoad;
+
+    function prevDefault(el){
+      el.addEventListener('touchstart', function(e){e.preventDefault()}, false);
+      el.addEventListener('touchmove', function(e){e.preventDefault()}, false);
+    }
+    prevDefault(dialogEl);
+    prevDefault(dialogLoadEl);
 
     // 全局清除toast
     VUX.clearToast = function(){

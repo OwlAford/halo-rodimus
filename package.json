@@ -22,7 +22,6 @@
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.9.0",
     "jade": "^1.11.0",
-    "jquery": "^2.2.1",
     "json-loader": "^0.5.4",
     "node-sass": "^3.4.2",
     "sass-loader": "^3.1.2",
@@ -36,7 +35,8 @@
     "vue-router": "^0.7.7",
     "vue-style-loader": "^1.0.0",
     "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "webpack-zepto": "0.0.1"
   },
   "dependencies": {
     "echarts": "^3.1.3",

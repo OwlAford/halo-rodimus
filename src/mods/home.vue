@@ -42,7 +42,7 @@ export default {
       during: 3000
     });
 
-    $('#btn').on('tap', function(){
+    $('#btn').on('click', function(){
       VUX.router.go({
         name: 'plugin',
         params: {
@@ -63,7 +63,7 @@ export default {
       delay: 2000
     })
     
-    $('#dialog').on('tap', function(){
+    $('#dialog').on('click', function(){
       VUX.dialog({
         type: 'confirm',
         title: '弹框测试',

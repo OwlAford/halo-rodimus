@@ -9,7 +9,7 @@
 </template>
 <style>
 header{width:100%; height:0.8rem;}
-header .header{width:100%; height:0.8rem; background-color:#313638; color:#fff; position:fixed; left:0; top:0; z-index:999; line-height:0.8rem;}
+header .header{width:100%; height:0.8rem; background-color:#313638; color:#fff; position:fixed; left:0; top:0; z-index:999; line-height:0.8rem; z-index:9999;}
 header .title{text-align:center;}
 header .left,
 header .right{position:absolute; top:0; right:0.1rem;}
@@ -60,10 +60,10 @@ export default {
     VUX.headerBtnRightFn = VUX.noop;
 
     // 左右按钮全局绑定事件
-    headerLeft.addEventListener('touchend', function(){
+    headerLeft.addEventListener('click', function(){
       VUX.headerBtnLeftFn()
     }, false);
-    headerRight.addEventListener('touchend', function(){
+    headerRight.addEventListener('click', function(){
       VUX.headerBtnRightFn()
     }, false);
 

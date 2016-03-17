@@ -1,10 +1,13 @@
 <template>
   <div class="wrap1">
+    <button class="btn1" v-el:pop0>点击选择省</button>
     <button class="btn1" v-el:pop1>点击选择省市</button>
-    <button class="btn1" v-el:pop2>点击选择省市地</button>
+    <!-- <button class="btn1" v-el:pop2>点击选择省市地</button> -->
     <button class="btn1" v-el:datetime1>点击选取时间1</button>
     <button class="btn1" v-el:datetime2>点击选取时间2</button>
     <div class="time">所选时间显示为：{{value}}</div>
+    <div class="weather">{{weather}}</div>
+    <div class="device">当前设备环境为{{device}}{{weixin}}</div>
     <div class="mychart" v-el:chart></div>
   </div>
 </template>
@@ -12,18 +15,20 @@
 .wrap1{padding:10px;}
 .mychart{width:100%; height:300px;}
 .btn1{padding:12px; text-align:center; display:block; color:#FFF; background-color:#0094e8; width:100%; margin:10px 0; border-radius:4px;}
-.time{padding:10px; background-color:#eee; color:#999; margin:8px 0;}
+.time,.weather,.device{padding:10px; background-color:#eee; color:#999; margin:8px 0;}
 </style>
 <script>
 import filter from '../vux/libs/filters'
-import popPicker from '../plugins/poppicker'
 
 export default {
   name: 'plugin',
 
   data () {
     return {
-      value: '请选择时间'
+      value: '请选择时间',
+      weather: '暂无天气',
+      device: VUX.device.os,
+      weixin: '浏览器'
     }
   },
 
@@ -32,6 +37,8 @@ export default {
     var els = view.$els;
 
     console.log(VUX.storage.remove('userifo'));
+
+    if(VUX.device.weixin) view.weixin = '微信';
 
     VUX.setHeader({
       title: '组件',
@@ -46,13 +53,6 @@ export default {
     })
 
     VUX.showWaitPanel();
-    setTimeout(function(){
-      VUX.hideWaitPanel();
-      VUX.toast({
-        text: '模拟加载完毕！',
-        delay: 1000
-      })
-    },1000);
 
     // 基于准备好的dom，初始化echarts实例
     var myChart = VUX.echarts.init(els.chart);
@@ -72,7 +72,20 @@ export default {
     });
 
     //调用级联选择插件
-    view.ppicker1 = new popPicker({
+    view.ppicker0 = VUX.popPicker({
+      data: [VUX.province],
+      onConfirm: function(data){
+        VUX.dialog({
+          title: '选择结果',
+          content: data.join('-'),
+        })
+      }
+    })
+    $(els.pop0).on('click',function(){
+      view.ppicker0.show();
+    })
+
+    view.ppicker1 = VUX.popPicker({
       data: [VUX.province, VUX.city],
       onConfirm: function(data){
         VUX.dialog({
@@ -81,23 +94,23 @@ export default {
         })
       }
     })
-    $(els.pop1).on('tap',function(){
+    $(els.pop1).on('click',function(){
       view.ppicker1.show();
     })
 
-    view.ppicker2 = new popPicker({
-      data: [VUX.province, VUX.city, VUX.county],
-      onConfirm: function(data){
-        VUX.dialog({
-          title: '选择结果',
-          content: data.join('-'),
-        })
-      }
-    })
+    // view.ppicker2 = VUX.popPicker({
+    //   data: [VUX.province, VUX.city, VUX.county],
+    //   onConfirm: function(data){
+    //     VUX.dialog({
+    //       title: '选择结果',
+    //       content: data.join('-'),
+    //     })
+    //   }
+    // })
 
-    $(els.pop2).on('tap',function(){
-      view.ppicker2.show();
-    })
+    // $(els.pop2).on('click',function(){
+    //   view.ppicker2.show();
+    // })
 
 
     // 调用滚动选择日期插件
@@ -123,14 +136,42 @@ export default {
       }
     })
 
+    // ajax获取天气数据
+    $.ajax({
+        type: "GET",
+        url: "http://wthrcdn.etouch.cn/weather_mini?city=杭州",
+        dataType: "jsonp",
+        success: function(data){
+          view.weather = JSON.stringify(data.data);
+        },
+        complete: function(){
+          VUX.hideWaitPanel();
+          VUX.toast({
+            text: '天气加载完毕！',
+            delay: 1000
+          })
+        },
+        error: function(){  
+          VUX.toast({
+            text: '数据请求失败',
+            delay: 1000
+          })
+        }  
+      });
+
   },
   beforeDestroy: function () {
     // 页面跳转并销毁当前页面前，必须销毁已调用滚动插件
     this.datePicker1.destroy();
     this.datePicker2.destroy();
+    this.ppicker0.destroy();
     this.ppicker1.destroy();
-    this.ppicker2.destroy();
-    this.ppicker1 = this.ppicker2 = this.datePicker1 = this.datePicker2 = null;
+    //this.ppicker2.destroy();
+    this.ppicker0 = 
+    this.ppicker1 = 
+    //this.ppicker2 = 
+    this.datePicker1 = 
+    this.datePicker2 = null;
   },
   methods: {
     

@@ -1,11 +1,15 @@
-import './device'
-import './jquery.finger'
+import Device from './device'
+import FastClick from './fastclick'
 import Swiper from './Swiper'
 import Scroller from './scroller'
 import DatePicker from './datetimepicker'
+import PopPicker from './poppicker'
 import Province from './province.json'
 import City from './city.json'
-import County from './county.json'
+//import County from './county.json'
+
+// 初始化fastclick
+FastClick.attach(document.body);
 
 // 引入 ECharts 主模块
 import Echarts from 'echarts/lib/echarts';
@@ -14,13 +18,15 @@ import Echarts from 'echarts/lib/echarts';
 import 'echarts/lib/chart/bar';
 
 // 引入提示框和标题组件
-//import 'echarts/lib/component/tooltip';
+import 'echarts/lib/component/tooltip';
 //import 'echarts/lib/component/title';
 
 
 (function(){
 
     var plugins = {
+
+        device: Device,
 
         swiper: function(opt){
              return new Swiper(opt)
@@ -46,11 +52,15 @@ import 'echarts/lib/chart/bar';
             return new DatePicker(opt)
         },
 
+        popPicker: function(options){
+            return new PopPicker(options)
+        },
+
         province: Province,
 
         city: City,
 
-        county: County
+        //county: County
         
     }
 

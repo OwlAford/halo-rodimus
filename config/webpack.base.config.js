@@ -5,16 +5,14 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var dep = {
     Vue: 'Vue',
     Router: 'vue-router',
-    $: "jquery",
-    jQuery: 'jquery',
-    'window.jQuery': 'jquery'
+    $: "webpack-zepto"
 }
 
 //全局第三方依赖库
 var libs = [
         'Vue', 
         'vue-router', 
-        'jquery', 
+        'webpack-zepto', 
         './src/plugins'
     ]
 
@@ -46,8 +44,8 @@ module.exports = {
                 exclude: /node_modules|vue\/dist/,
                 loader: 'babel'
             },{
-                test: require.resolve('jquery'), 
-                loader: 'expose?jQuery'
+                test: require.resolve('webpack-zepto'), 
+                loader: 'expose?Zepto'
             },{ 
                 test: /\.css$/, 
                 loader: 'style-loader!css-loader' 

@@ -10,7 +10,7 @@
 </template>
 <style>
 footer{width:100%; height:0.9rem;}
-footer .footer{width:100%; height:0.9rem; position:fixed; left:0; bottom:0; background-color:#fff; z-index:999; font-size:0.18rem; color:#b0b0b0; display:box; display:-webkit-box;}
+footer .footer{width:100%; height:0.9rem; position:fixed; left:0; bottom:0; background-color:#fff; z-index:9999; font-size:0.18rem; color:#b0b0b0; display:box; display:-webkit-box;}
 footer .footer >i{display:block; -webkit-box-flex:1; box-flex:1; width:25%; text-align:center; padding-top:0.52rem;}
 footer .footer >i:after{position:absolute; top:0.12rem; left:50%; margin-left:-0.2rem; font-size:0.4rem; color:#999;}
 footer .footer >i.active,
