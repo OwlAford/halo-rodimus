@@ -67,12 +67,21 @@ router.beforeEach(function () {
 	VUX.showFooter(true);
 	VUX.clearToast();
 	VUX.hideWaitPanel();
+	VUX.clearDialog();
 });
 router.redirect({
   '*': '/home'
 });
 // 全局保存实例化路由
 VUX.router = router;
+// 路由返回方法
+VUX.back = function(){
+	VUX.getDialogState() ? 
+	VUX.clearDialog() :
+	history.back();
+}
+
+
 router.start(App, '#app');
 
 

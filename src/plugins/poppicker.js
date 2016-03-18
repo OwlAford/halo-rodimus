@@ -17,6 +17,7 @@ var MASK = null;
 function popPicker(options){
 
   var defaults = {
+    single: false,
     data: [],
     onConfirm: function(){},
     onCancel: function(){}
@@ -27,7 +28,7 @@ function popPicker(options){
   }
 
   this.opts = defaults;
-  this.colNum = this.opts.data.length;
+  this.opts.single ? this.colNum = 1 : this.colNum = this.opts.data.length;
   this.init();
   this.render();
   this.bindEvent();
@@ -120,15 +121,17 @@ popPicker.prototype = {
 
     var me = this;
     var DATA = me.opts.data;
+    var SINGLE = me.opts.single;
     me.scroller = [];
 
     //////////////////////////////////////////////
-    if(me.colNum == 1){
-      var DT = DATA[0];
+    if(me.colNum == 1 || SINGLE){
+      var DT;
+      SINGLE ? DT = DATA : DT = DATA[0];
       me.colum[0].param = formatNameVal(DT[0]);
       //console.log(me.colum[0].param);
       me.scroller[0] = me.renderScroller(me.colum[0], DT, function(value){
-        me.colum[0].param = getNameVal(DT, value);
+        SINGLE ? me.colum[0].param = value : me.colum[0].param = getNameVal(DT, value);
         //console.log(me.colum[0].param);
       })
     }else if(me.colNum == 2){
@@ -294,6 +297,7 @@ popPicker.prototype = {
 
   bindEvent: function(){
     var me = this;
+    var SINGLE = me.opts.single;
     // 取消按钮绑定事件
     me.cancelBtn.addEventListener('click', function(){
       me.opts.onCancel();
@@ -303,7 +307,8 @@ popPicker.prototype = {
     me.okBtn.addEventListener('click', function(){
       // 获取所得参数
       var data = [];
-      Array.prototype.forEach.call(me.colum, function(itm){
+      SINGLE ? data = me.colum[0].param :
+       Array.prototype.forEach.call(me.colum, function(itm){
           data.push(itm.param.name);
       });
       //console.log(data);

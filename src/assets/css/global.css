@@ -13,7 +13,8 @@ body{background-color:#f9f9f9; font-size:0.28rem; width:100%;}
 *{-webkit-box-sizing:border-box; box-sizing:border-box;}
 *:not(footer):not(header){position:relative;}
 @font-face{font-family:"iconfont"; src:url('../font/iconfont.ttf') format('truetype');} 
-i:after{font-family:iconfont; font-size:0.48rem; font-weight:400; font-style:normal; line-height:1; display:inline-block; text-decoration:none; -webkit-font-smoothing:antialiased;}
+i:after,
+.vux-list-item:after{font-family:iconfont; font-size:0.48rem; font-weight:400; font-style:normal; line-height:1; display:inline-block; text-decoration:none; -webkit-font-smoothing:antialiased;}
 
 
 /* router view transition */
@@ -125,6 +126,7 @@ i.toast.success:after{content:'\e617';}
 .dialogBox .btnGrp .btn:active{background-color:#F8F8F8;}
 
 /* loader */
+.dialog.wait{z-index:99999;}
 .dialog .wrap{width:0.96rem; height:0.96rem; margin:-0.48rem 0 0 -0.48rem; background-color:rgba(0,0,0,.6); border-radius:0.1rem; -webkit-border-radius:0.1rem; position:absolute; left:50%; top:50%;}
 
 .spinner{
@@ -152,3 +154,12 @@ i.toast.success:after{content:'\e617';}
 .vux-flexbox{width:100%; text-align:left; display:-webkit-box; display:-o-box; display:-ms-flexbox; display:-webkit-flex; display:flex; -webkit-box-align:center; -webkit-align-items:center;}
 .vux-flexbox .vux-flexbox-item{-webkit-box-flex:1; -o-box-flex:1; -ms-flex:1; -webkit-flex:1; flex:1; min-width:20px;}
 .vux-flexbox .vux-flexbox-item:first-child{margin-left:0!important;}
+
+
+/* Basic List Style */
+.vux-list{width:100%; background-color:#fff;}
+.vux-list >ul{border:1px solid transparent; border-width:1px 0;}
+.vux-list .vux-list-item{width:100%; padding:0.2rem 0.24rem; transition:background-color ease .3s; -webkit-transition:background-color ease .3s;}
+.vux-list >ul .vux-list-item:active{background-color:#f8f8f8;}
+.vux-list .vux-list-item.folder{padding-right:0.48rem;}
+.vux-list .vux-list-item.folder:after{content:'\e61a'; color:#aaa; font-size:0.28rem; position:absolute; right:0.2rem; top:50%; margin-top:-0.14rem;}

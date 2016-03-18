@@ -13,7 +13,7 @@
       </div>
     </div>
   </div>
-  <div :class="{'dialog': loaderState, 'hide': !loaderState}" v-el:dialog-load>
+  <div class="wait" :class="{'dialog': loaderState, 'hide': !loaderState}" v-el:dialog-load>
     <div class="wrap">
       <div class="spinner"><div class="spinner-icon"></div></div>
     </div>
@@ -82,6 +82,11 @@ export default {
       toastEl.className = clsName;
       if(VUX.toastTimer) clearTimeout(VUX.toastTimer);
       VUX.toastTimer = setTimeout(VUX.clearToast, time)
+    }
+
+    // 获取dialog状态
+    VUX.getDialogState = function(){
+      return view.dialogState
     }
 
     // 清除dialog框

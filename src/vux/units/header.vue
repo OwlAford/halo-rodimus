@@ -55,8 +55,8 @@ export default {
       if(part == 'left' || !part) headerLeft.innerHTML = '';
     }
 
-    // 定义全局左右按钮点击方法
-    VUX.headerBtnLeftFn = history.back;
+    // 定义全局左右按钮默认点击方法
+    VUX.headerBtnLeftFn = VUX.back;
     VUX.headerBtnRightFn = VUX.noop;
 
     // 左右按钮全局绑定事件
@@ -87,7 +87,7 @@ export default {
         if(fn){
           var callback = function(){
             fn();
-            tpl == 'back' && history.back();
+            tpl == 'back' && VUX.back();
           }
           side == 'left' ? 
           VUX.headerBtnLeftFn = callback : 

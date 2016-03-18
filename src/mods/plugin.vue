@@ -1,4 +1,17 @@
 <template>
+  <article class="plugins">
+    <div class="vux-list">
+      <ul>
+        <li class="vux-list-item folder"><i class="a">toast 消息提示框</i></li>
+        <li class="vux-list-item folder"><i class="b">alert 提示弹框</i></li>
+        <li class="vux-list-item folder"><i class="c">confirm 消息确认框</i></li>
+        <li class="vux-list-item folder"><i class="d">loading 加载等待层</i></li>
+        <li class="vux-list-item folder"><i class="e">eCharts 统计图表插件</i></li>
+        <li class="vux-list-item folder"><i class="f">poppicker 弹出省市地级联选择框</i></li>
+        <li class="vux-list-item folder"><i class="g">datetimepicker 日期时间选择</i></li>
+      </ul>
+    </div>
+  </article>
   <div class="wrap1">
     <button class="btn1" v-el:pop0>点击选择省</button>
     <button class="btn1" v-el:pop1>点击选择省市</button>
@@ -12,6 +25,15 @@
   </div>
 </template>
 <style>
+.plugins .vux-list i{padding-left:0.42rem;}
+.plugins .vux-list i:after{content:'\e616'; font-size:0.32rem; position:absolute; left:0; top:50%; margin-top:-0.16rem;}
+.plugins .vux-list i.b:after{content:'\e608';}
+.plugins .vux-list i.c:after{content:'\e611';}
+.plugins .vux-list i.d:after{content:'\e60a';}
+.plugins .vux-list i.e:after{content:'\e610';}
+.plugins .vux-list i.f:after{content:'\e60b';}
+.plugins .vux-list i.g:after{content:'\e615';}
+/*================================================================*/
 .wrap1{padding:10px;}
 .mychart{width:100%; height:300px;}
 .btn1{padding:12px; text-align:center; display:block; color:#FFF; background-color:#0094e8; width:100%; margin:10px 0; border-radius:4px;}
@@ -36,20 +58,20 @@ export default {
     var view = this;
     var els = view.$els;
 
-    console.log(VUX.storage.remove('userifo'));
+    // console.log(VUX.storage.remove('userifo'));
 
     if(VUX.device.weixin) view.weixin = '微信';
 
     VUX.setHeader({
       title: '组件',
       leftTpl: 'back',
-      leftFn: function(){
-        console.log('你点击了返回');
-      },
-      rightTpl: 'cancel',
-      rightFn:function(){
-        console.log('你点击了取消');
-      }
+      // leftFn: function(){
+      //   console.log('你点击了返回');
+      // },
+      // rightTpl: 'cancel',
+      // rightFn:function(){
+      //   console.log('你点击了取消');
+      // }
     })
 
     VUX.showWaitPanel();
@@ -86,11 +108,20 @@ export default {
     })
 
     view.ppicker1 = VUX.popPicker({
+      // single: true,
+      // data: [0,1,2,3,4],
+      // data: [
+      //         {name:'a', value:1},
+      //         {name:'b', value:2},
+      //         {name:'c', value:3},
+      //         {name:'d', value:4},
+      //       ],
       data: [VUX.province, VUX.city],
       onConfirm: function(data){
         VUX.dialog({
           title: '选择结果',
           content: data.join('-'),
+          //content: data,
         })
       }
     })
