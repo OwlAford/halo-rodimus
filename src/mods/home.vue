@@ -20,10 +20,10 @@
       </h1>
       <div class="grid">
         <ul>
-          <li v-for="itm in list" track-by="time">
+          <li v-for="itm in list" track-by="$index">
             <a :href="itm.tar" target="blank">
               <div class="item">
-                <div class="imgr" v-bind:style="{backgroundImage: 'url('+itm.url+')'}"></div>
+                <div class="imgr" :data-time=itm.time :style="{backgroundImage: 'url('+itm.url+')'}"></div>
                 <div class="txt">{{itm.title}}</div>
               </div>
             </a>  
