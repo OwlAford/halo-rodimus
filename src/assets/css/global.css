@@ -159,7 +159,10 @@ i.toast.success:after{content:'\e617';}
 /* Basic List Style */
 .vux-list{width:100%; background-color:#fff;}
 .vux-list >ul{border:1px solid transparent; border-width:1px 0;}
-.vux-list .vux-list-item{width:100%; padding:0.2rem 0.24rem; transition:background-color ease .3s; -webkit-transition:background-color ease .3s;}
-.vux-list >ul .vux-list-item:active{background-color:#f8f8f8;}
-.vux-list .vux-list-item.folder{padding-right:0.48rem;}
-.vux-list .vux-list-item.folder:after{content:'\e61a'; color:#aaa; font-size:0.28rem; position:absolute; right:0.2rem; top:50%; margin-top:-0.14rem;}
+.vux-list .vux-list-item{width:100%; padding:0.2rem; transition:background-color ease .3s; -webkit-transition:background-color ease .3s;}
+.vux-list li >.vux-list-item{padding:0.2rem 0;}
+.vux-list >ul li:active{background-color:#f8f8f8;}
+.vux-list .vux-list-item.folder{padding-right:0.44rem;}
+.vux-list li .vux-list-item.folder{padding-right:0.24rem;}
+.vux-list .vux-list-item.folder:after{content:'\e61a'; color:#aaa; font-size:0.2rem; position:absolute; right:0.2rem; top:50%; margin-top:-0.1rem;}
+.vux-list li >.vux-list-item.folder:after{right:0;}

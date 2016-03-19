@@ -7,6 +7,7 @@ import PopPicker from './poppicker'
 import Province from './province.json'
 import City from './city.json'
 //import County from './county.json'
+import NProgress from 'nprogress'
 
 // 初始化fastclick
 FastClick.attach(document.body);
@@ -60,7 +61,15 @@ import 'echarts/lib/component/tooltip';
 
         city: City,
 
-        //county: County
+        //county: County,
+
+        progress: NProgress.configure({ 
+            showSpinner: false,
+            //speed: 300,
+            //minimum: 0.1,
+            trickleRate: 0.06, 
+            trickleSpeed: 800
+        })
         
     }
 

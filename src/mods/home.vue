@@ -35,26 +35,26 @@
 </template>
 
 <style scoped>
-.channel{height:1.78rem; background-color:#f2f4f5; width:100%;}
+.channel{height:1.78rem; background-color:#fff; width:100%;}
 .channel .vux-flexbox-item{height:100%; width:33.333%; display:block; padding-top:1.28rem; font-size:0.24rem; text-align:center;}
 .channel .vux-flexbox-item:after{content:'\e60b'; display:block; height:0.84rem; width:0.84rem;color:#2a2f31; border-radius:50%; background-color:#fff; line-height:0.86rem; position:absolute; top:0.32rem; left:50%; overflow:hidden; margin-left:-0.42rem; transition:all .3s; -webkit-transition:all .3s; background:url(../assets/svg/circle.svg) no-repeat; background-size:100% 100%;}
 .channel .vux-flexbox-item.b:after{content:'\e610';}
 .channel .vux-flexbox-item.c:after{content:'\e615';}
 .channel .vux-flexbox-item:active:after{color:#fff; background-color:#2a2f31;}
-.essay{padding:0 0.16rem; background-color:#f2f4f5; overflow:hidden;}
+.essay{padding:0 0.16rem; background-color:#fff; overflow:hidden;}
 .essay .title{padding:0.14rem 0; line-height:0.42rem;}
 .essay .title i{display:block;}
 .essay .title i.cell{padding-left:0.4rem;}
 .essay .title i.cell:after{content:'\e613'; font-size:0.32rem; position:absolute; color:#33383a; left:0; top:50%; margin-top:-0.18rem;}
 .essay .title i.more{font-size:0.24rem; color:#545453;}
-.essay .title i.more:after{content:'\e61a'; font-size:0.26rem; color:#545453; vertical-align:middle; margin-top:-0.04rem;}
+.essay .title i.more:after{content:'\e61a'; font-size:0.22rem; color:#545453; vertical-align:middle; margin-top:-0.04rem;}
 .essay .grid{width:100%; min-height:1rem; font-size:0;}
-.essay .grid li{height:2.88rem; width:33.333%; padding-right:0.12rem; display:inline-block; overflow:hidden; vertical-align:top;}
+.essay .grid li{height:2.8rem; width:33.333%; padding-right:0.12rem; display:inline-block; overflow:hidden; vertical-align:top;}
 .essay .grid li:nth-child(3n+0){padding-right:0;}
-.essay .grid li a{font-size:0.24rem; color:#252525; line-height:1.4;}
+.essay .grid li a{font-size:0.23rem; color:#252525; line-height:1.34;}
 .essay .grid li .item{width:100%;}
 .grid li .item .imgr{width:100%; height:1.95rem; background-color:#f8f8f8; background-size:auto 100%; background-position:center center;}
-.grid li .item .txt{width:100%; height:0.7rem; overflow:hidden; padding:0.06rem 0 0;}
+.grid li .item .txt{width:100%; height:0.616rem; overflow:hidden; padding:0.06rem 0 0;}
 </style>
 
 <script>
@@ -100,19 +100,22 @@ export default {
     });
 
     // 获取列表
-    VUX.showWaitPanel();
+    // VUX.showWaitPanel();
+    VUX.progress.start();
     FB.child(UID + '/home/list').once("value", function(snapshot){
         var data = snapshot.val(), rzt = [];
         Object.keys(data).forEach(function(k) {
             rzt.push(data[k]);
         });
         view.list = (rzt.reverse()).slice(0, 100);
-        VUX.hideWaitPanel();
+        //VUX.hideWaitPanel();
+        VUX.progress.done();
         //console.log(rzt);
       }, function(err){
           if(errorCallback) errorCallback();
           var errStr = "数据获取失败: " + err.code;
-          VUX.hideWaitPanel();
+          //VUX.hideWaitPanel();
+          VUX.progress.done();
           VUX.toast({
             type: 'error',
             text: errStr,

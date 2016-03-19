@@ -2,14 +2,19 @@
   <article class="plugins">
     <div class="vux-list">
       <ul>
-        <li class="vux-list-item folder"><i class="a">toast 消息提示框</i></li>
-        <li class="vux-list-item folder"><i class="b">alert 提示弹框</i></li>
-        <li class="vux-list-item folder"><i class="c">confirm 消息确认框</i></li>
-        <li class="vux-list-item folder"><i class="d">loading 加载等待层</i></li>
-        <li class="vux-list-item folder"><i class="e">eCharts 统计图表插件</i></li>
-        <li class="vux-list-item folder"><i class="f">poppicker 弹出省市地级联选择框</i></li>
-        <li class="vux-list-item folder"><i class="g">datetimepicker 日期时间选择</i></li>
+        <li><div class="vux-list-item folder"><i class="a">toast 消息提示</i></div></li>
+        <li><div class="vux-list-item folder"><i class="b">alert 提示框</i></div></li>
+        <li><div class="vux-list-item folder"><i class="c">confirm 消息确认框</i></div></li>
+        <li><div class="vux-list-item folder"><i class="d">loading 加载等待层</i></div></li>
+        <li><div class="vux-list-item folder"><i class="e">eCharts 统计图表插件</i></div></li>
+        <li><div class="vux-list-item folder"><i class="h">scroller 滑动选择</i></div></li>
+        <li><div class="vux-list-item folder"><i class="f">poppicker 弹出省市地级联选择框</i></div></li>
+        <li><div class="vux-list-item folder"><i class="g">datetimepicker 日期时间选择</i></div></li>
+        <li><div class="vux-list-item folder"><i class="i">swiper 轮播图组件</i></div></li>
+        <li><div class="vux-list-item folder"><i class="j">progress 加载组件</i></div></li>
+        <li><div class="vux-list-item folder"><i class="k">storage 数据存储</i></div></li>
       </ul>
+
     </div>
   </article>
   <div class="wrap1">
@@ -25,14 +30,21 @@
   </div>
 </template>
 <style>
-.plugins .vux-list i{padding-left:0.42rem;}
-.plugins .vux-list i:after{content:'\e616'; font-size:0.32rem; position:absolute; left:0; top:50%; margin-top:-0.16rem;}
-.plugins .vux-list i.b:after{content:'\e608';}
-.plugins .vux-list i.c:after{content:'\e611';}
-.plugins .vux-list i.d:after{content:'\e60a';}
-.plugins .vux-list i.e:after{content:'\e610';}
-.plugins .vux-list i.f:after{content:'\e60b';}
-.plugins .vux-list i.g:after{content:'\e615';}
+.plugins .vux-list li{padding:0 0.3rem; font-size:0.26rem;}
+.plugins .vux-list li >.vux-list-item{padding:0.24rem 0;}
+.plugins .vux-list i{padding-left:0.58rem;}
+.plugins .vux-list i:after{content:'\e608'; color:#4fa5f1; font-size:0.36rem; position:absolute; left:0; top:50%; margin-top:-0.18rem;}
+.android:not(.weixin) .plugins .vux-list i:after{margin-top:-0.14rem;}
+.plugins .vux-list i.b:after{content:'\e60a'; color:#00c193;}
+.plugins .vux-list i.c:after{content:'\e60c'; color:#4798f3;}
+.plugins .vux-list i.d:after{content:'\e60e'; color:#ffa626;}
+.plugins .vux-list i.e:after{content:'\e611'; color:#f97664;}
+.plugins .vux-list i.f:after{content:'\e614'; color:#967db3;}
+.plugins .vux-list i.g:after{content:'\e616'; color:#91c66a;}
+.plugins .vux-list i.h:after{content:'\e61b'; color:#4fa5f1;}
+.plugins .vux-list i.i:after{content:'\e612'; color:#00c193;}
+.plugins .vux-list i.j:after{content:'\e61d'; color:#4798f3;}
+.plugins .vux-list i.k:after{content:'\e61c'; color:#ffa626;}
 /*================================================================*/
 .wrap1{padding:10px;}
 .mychart{width:100%; height:300px;}
@@ -73,8 +85,6 @@ export default {
       //   console.log('你点击了取消');
       // }
     })
-
-    VUX.showWaitPanel();
 
     // 基于准备好的dom，初始化echarts实例
     var myChart = VUX.echarts.init(els.chart);
@@ -167,6 +177,8 @@ export default {
       }
     })
 
+
+    VUX.progress.start();
     // ajax获取天气数据
     $.ajax({
         type: "GET",
@@ -176,7 +188,7 @@ export default {
           view.weather = JSON.stringify(data.data);
         },
         complete: function(){
-          VUX.hideWaitPanel();
+          VUX.progress.done();
           VUX.toast({
             text: '天气加载完毕！',
             delay: 1000

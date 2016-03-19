@@ -1,5 +1,5 @@
 /* 1px hack */
-.ui-border-t,.vux-list-item + .vux-list-item {
+.ui-border-t,.vux-list-item + .vux-list-item , li + li .vux-list-item{
   border-top: 1px solid #e2e2e2; }
 
 .ui-border-b {
@@ -47,10 +47,10 @@
     position: relative;
     border: 0; }
 
-  .ui-border-t, .vux-list-item + .vux-list-item, .ui-border-b, .ui-border-l, .ui-border-r, .ui-border-tb, .vux-list {
+  .ui-border-t, .vux-list-item + .vux-list-item, li + li .vux-list-item, .ui-border-b, .ui-border-l, .ui-border-r, .ui-border-tb, .vux-list {
     border: 0; }
 
-  .ui-border-t, .vux-list-item + .vux-list-item {
+  .ui-border-t, .vux-list-item + .vux-list-item, li + li .vux-list-item {
     background-position: left top;
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.5, transparent), color-stop(0.5, #e2e2e2)); }
 
@@ -60,6 +60,7 @@
 
   .ui-border-t,
   .vux-list-item + .vux-list-item,
+  li + li .vux-list-item,
   .ui-border-b,
   .ui-border-tb,
   .vux-list {
