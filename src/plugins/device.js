@@ -20,11 +20,11 @@ export default (function(win){
 	}
  	
  	// 判断是否为微信
-	var UA = ua.toLowerCase();  
-    UA.match(/MicroMessenger/i) == "micromessenger" ? 
+    (ua.toLowerCase()).match(/MicroMessenger/i) == "micromessenger" ? 
     device.weixin = true : 
     device.weixin = false;
 
+    // 为页面添加对应的设备标识样式
 	docEl.className = device.os;
 	if(device.weixin) docEl.classList.add('weixin');
 
