@@ -16,18 +16,19 @@
       </ul>
 
     </div>
+    <!-- /////////////////////////////////////////////////////////////////// -->
+    <div class="wrap1">
+      <button class="btn1" v-el:pop0>点击选择省</button>
+      <button class="btn1" v-el:pop1>点击选择省市</button>
+      <!-- <button class="btn1" v-el:pop2>点击选择省市地</button> -->
+      <button class="btn1" v-el:datetime1>点击选取时间1</button>
+      <button class="btn1" v-el:datetime2>点击选取时间2</button>
+      <div class="time">所选时间显示为：{{value}}</div>
+      <div class="weather">{{weather}}</div>
+      <div class="device">当前设备环境为{{device}}{{weixin}}</div>
+      <div class="mychart" v-el:chart></div>
+    </div>
   </article>
-  <div class="wrap1">
-    <button class="btn1" v-el:pop0>点击选择省</button>
-    <button class="btn1" v-el:pop1>点击选择省市</button>
-    <!-- <button class="btn1" v-el:pop2>点击选择省市地</button> -->
-    <button class="btn1" v-el:datetime1>点击选取时间1</button>
-    <button class="btn1" v-el:datetime2>点击选取时间2</button>
-    <div class="time">所选时间显示为：{{value}}</div>
-    <div class="weather">{{weather}}</div>
-    <div class="device">当前设备环境为{{device}}{{weixin}}</div>
-    <div class="mychart" v-el:chart></div>
-  </div>
 </template>
 <style>
 .plugins .vux-list li{padding:0 0.3rem; font-size:0.26rem;}
@@ -110,6 +111,12 @@ export default {
         VUX.dialog({
           title: '选择结果',
           content: data.join('-'),
+          okFn: function(){
+            console.log('你点击了确认')
+          },
+          cancelFn: function(){
+            console.log('你点击了取消')
+          }
         })
       }
     })
@@ -129,6 +136,7 @@ export default {
       data: [VUX.province, VUX.city],
       onConfirm: function(data){
         VUX.dialog({
+          type: 'alert',
           title: '选择结果',
           content: data.join('-'),
           //content: data,

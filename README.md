@@ -1,2 +1,3 @@
-# VUX 移动前端开发框架#vue-Mobile
-# VUX-Mobile
+# vux-mobile 移动前端开发框架文档
+
+

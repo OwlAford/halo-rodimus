@@ -15,6 +15,11 @@
     </div>
     <div class="essay">
       <h1 class="title row">
+        <i class="cell c">气温走势</i>
+      </h1>
+      <div class="chart" v-el:chart-line></div>
+
+      <h1 class="title row">
         <i class="cell">推荐文章</i>
         <i class="more">更多</i>
       </h1>
@@ -46,8 +51,10 @@
 .essay .title i{display:block;}
 .essay .title i.cell{padding-left:0.4rem;}
 .essay .title i.cell:after{content:'\e613'; font-size:0.32rem; position:absolute; color:#33383a; left:0; top:50%; margin-top:-0.18rem;}
+.essay .title i.cell.c:after{content:'\e61e';}
 .essay .title i.more{font-size:0.24rem; color:#545453;}
 .essay .title i.more:after{content:'\e61a'; font-size:0.22rem; color:#545453; vertical-align:middle; margin-top:-0.04rem;}
+.essay .chart{height:2.4rem;}
 .essay .grid{width:100%; min-height:1rem; font-size:0;}
 .essay .grid li{height:2.8rem; width:33.333%; padding-right:0.12rem; display:inline-block; overflow:hidden; vertical-align:top;}
 .essay .grid li:nth-child(3n+0){padding-right:0;}
@@ -97,6 +104,78 @@ export default {
         //console.log(i);
       },
       during: 3000
+    });
+
+    // 基于准备好的dom，初始化echarts实例
+    els.chartLine.style.height = VUX.utils.matrixing(2.4) + 'px';
+    els.chartLine.style.width = VUX.clientWidth - VUX.utils.matrixing(0.32) + 'px';
+    var chartLine = VUX.echarts.init(els.chartLine);
+    // 绘制图表
+    chartLine.setOption({
+        grid: {
+          show: true,
+          backgroundColor: '#F9FBFD',
+          borderWidth: 0,
+          left: 10,
+          right: 10,
+          top: 0,
+          bottom: 10
+        },
+        xAxis: [
+            {
+                axisLine: {
+                  show: false
+                },
+                splitLine: {
+                  show: false
+                },
+                axisTick: {
+                  show: false
+                },
+                axisLabel: {
+                  show: false
+                },
+                type: 'category',
+                boundaryGap: false,
+                data: ['周一','周二','周三','周四','周五','周六','周日']
+            }
+        ],
+        yAxis: [
+            {   
+                axisLine: {
+                  show: false
+                },
+                splitLine: {
+                  show: false
+                },
+                axisTick: {
+                  show: false
+                },
+                axisLabel: {
+                  show: false
+                },
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+              smooth: true,
+              name:'上周气温',
+              type:'line',
+              showSymbol: false,
+              lineStyle:{
+                normal: {
+                  color: '#0087FB'
+                }
+              },
+              areaStyle: {normal: {
+                color: '#0087FB',
+                opacity: 0.2
+              }},
+              data:[6, 11, 19, 18, 22, 24, 29]
+              
+          }
+        ]
     });
 
     // 获取列表

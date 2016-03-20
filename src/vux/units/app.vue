@@ -8,8 +8,8 @@
       <div class="title">{{dialogtitle}}</div>
       <div class="content">{{dialogcontent}}</div>
       <div class="btnGrp ui-border-t">
-        <button class="btn" v-show="cancelState" onclick="VUX.dialogCancel()">取消</button>
-        <button class="btn ui-border-l" onclick="VUX.dialogOk()">确定</button>
+        <button class="btn cancel" v-show="cancelState">取消</button>
+        <button class="btn ok ui-border-l">确定</button>
       </div>
     </div>
   </div>
@@ -53,9 +53,10 @@ export default {
     var toastEl = els.toast;
     var dialogEl = els.dialog;
     var dialogLoadEl = els.dialogLoad;
+    var cancelBtn = dialogEl.getElementsByClassName('cancel')[0];
+    var okBtn = dialogEl.getElementsByClassName('ok')[0];
 
     function prevDefault(el){
-      el.addEventListener('touchstart', function(e){e.preventDefault()}, false);
       el.addEventListener('touchmove', function(e){e.preventDefault()}, false);
     }
     prevDefault(dialogEl);
@@ -121,6 +122,14 @@ export default {
       }
 
     }
+
+    // dialog确认取消按钮全局绑定事件
+    cancelBtn.addEventListener('click', function(){
+      VUX.dialogCancel()
+    }, false);
+    okBtn.addEventListener('click', function(){
+      VUX.dialogOk()
+    }, false);
 
     //控制显示和隐藏等待层
     VUX.showWaitPanel = function(){

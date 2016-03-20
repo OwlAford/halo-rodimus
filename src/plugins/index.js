@@ -15,8 +15,9 @@ FastClick.attach(document.body);
 // 引入 ECharts 主模块
 import Echarts from 'echarts/lib/echarts';
 
-// 引入柱状图
+// 引入柱状图、折线图
 import 'echarts/lib/chart/bar';
+import 'echarts/lib/chart/line';
 
 // 引入提示框和标题组件
 import 'echarts/lib/component/tooltip';

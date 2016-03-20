@@ -28,6 +28,7 @@ VUX.utils = Utils;
 		rootSize > 58.59375 ? rootSize = 58.59375 : null;
 		// 设置页面高度和根字体大小
 		VUX.clientHeight = docEl.clientHeight;
+		VUX.clientWidth = docEl.clientWidth;
 		VUX.rootSize = rootSize;
 		// 设置头部底部显示状态
 		VUX.headerShowState = true;
