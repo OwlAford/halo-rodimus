@@ -2,10 +2,10 @@
   <article class="plugins">
     <div class="vux-list">
       <ul>
-        <li><div class="vux-list-item folder" v-link="{ name: 'toast' }"><i class="a">toast 消息提示</i></div></li>
-        <li><div class="vux-list-item folder"><i class="b">alert 提示框</i></div></li>
-        <li><div class="vux-list-item folder"><i class="c">confirm 消息确认框</i></div></li>
-        <li><div class="vux-list-item folder"><i class="d">loading 加载等待层</i></div></li>
+        <li><div class="vux-list-item folder" v-link="{name: 'toast'}"><i class="a">toast 消息提示</i></div></li>
+        <li><div class="vux-list-item folder" v-link="{path: '/dialog/alert'}"><i class="b">alert 提示框</i></div></li>
+        <li><div class="vux-list-item folder" v-link="{path: '/dialog/confirm'}"><i class="c">confirm 消息确认框</i></div></li>
+        <li><div class="vux-list-item folder" @click="triggerLoading"><i class="d">loading 加载等待层 (演示3秒)</i></div></li>
         <li><div class="vux-list-item folder"><i class="e">eCharts 统计图表插件</i></div></li>
         <li><div class="vux-list-item folder"><i class="h">scroller 滑动选择</i></div></li>
         <li><div class="vux-list-item folder"><i class="f">poppicker 弹出省市地级联选择框</i></div></li>
@@ -257,7 +257,13 @@ export default {
     VUX.clearToast();
   },
   methods: {
-    
+    triggerLoading: function(){
+      VUX.showWaitPanel();
+      // 三秒后自动清除等待层
+      setTimeout(function(){
+        VUX.hideWaitPanel();
+      },3000)
+    }
   }
 }
 </script>

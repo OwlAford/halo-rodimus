@@ -14,6 +14,10 @@ export default function(router) {
 		'/toast': {
 		    name : 'toast',
 		    component: require('../mods/example/toast.vue')
+		},
+		'/dialog/:type': {
+		    name : 'alert',
+		    component: require('../mods/example/dialog.vue')
 		}
 	})
 }

@@ -31,7 +31,7 @@ function scrollLoad(options){
   me.$tip = tmp.firstElementChild;
   
   // 设定滚动容器
-  if(!opts.fullScreen || opts.container){
+  if(!opts.fullScreen && opts.container){
     me.$container = getElement(opts.container);
     me.$container.classList.add('autoHeight');
     opts.scroller ? 
@@ -81,7 +81,10 @@ scrollLoad.prototype = {
       scrollTop = me.$container.scrollTop;
     }
     var distance = scrollerHeight - scrollTop - me.containerHeight; 
-    if(distance < me.opts.threshold && me.flag){
+    var threshold = me.opts.threshold;
+    // 若为全屏滚动
+    me.opts.fullScreen && VUX.footerHeight ? threshold += VUX.footerHeight : null;
+    if(distance < threshold && me.flag){
       me.flag = false;
       me.$tip.classList.add('show');
       // 执行回调函数(传入一个刷新方法)

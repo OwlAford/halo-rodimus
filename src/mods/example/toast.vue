@@ -11,8 +11,8 @@
   </article>
 </template>
 <style scoped>
-.toast{padding:0.2rem 0.2rem 0.4rem; background-color:#fff;}
-.textarea{padding:0.2rem; background-color:#f8f8f8;}
+.toast{padding:0.3rem 0.2rem 0.4rem; background-color:#fff;}
+.textarea{padding:0.2rem; height:2rem; background-color:#f4f4f4;}
 .textarea textarea{width:100%; height:100%; resize:none;}
 .type{margin:0.2rem 0;}
 </style>
@@ -33,8 +33,7 @@ export default {
 
     // 初始化头部
     VUX.setHeader({
-      title: 'toast组件',
-      leftTpl: 'back'
+      title: 'toast组件'
     })
 
     view.ppicker = VUX.popPicker({
@@ -55,6 +54,7 @@ export default {
   },
 
   beforeDestroy: function () {
+    // 跳转时必须销毁 级联选择插件
     this.ppicker.destroy();
   },
 

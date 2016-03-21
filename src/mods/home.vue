@@ -60,7 +60,7 @@
 .essay .grid li:nth-child(3n+0){padding-right:0;}
 .essay .grid li a{font-size:0.23rem; color:#252525; line-height:1.34;}
 .essay .grid li .item{width:100%;}
-.grid li .item .imgr{width:100%; height:1.95rem; background-color:#f8f8f8; background-size:auto 100%; background-position:center center;}
+.grid li .item .imgr{width:100%; height:1.95rem; background-color:#f8f8f8; background-size:auto 100%; background-position:center center; background-repeat:no-repeat;}
 .grid li .item .txt{width:100%; height:0.616rem; overflow:hidden; padding:0.06rem 0 0;}
 </style>
 
