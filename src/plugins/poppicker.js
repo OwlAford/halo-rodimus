@@ -309,7 +309,7 @@ popPicker.prototype = {
       var data = [];
       SINGLE ? data = me.colum[0].param :
        Array.prototype.forEach.call(me.colum, function(itm){
-          data.push(itm.param.name);
+          data.push(itm.param);
       });
       //console.log(data);
       me.opts.onConfirm(data);

@@ -1,6 +1,7 @@
 import Device from './device'
 import FastClick from './fastclick'
 import Swiper from './Swiper'
+import ScrollLoad from './scrollLoad'
 import Scroller from './scroller'
 import DatePicker from './datetimepicker'
 import PopPicker from './poppicker'
@@ -32,6 +33,10 @@ import 'echarts/lib/component/tooltip';
 
         swiper: function(opt){
              return new Swiper(opt)
+        },
+
+        scrollLoad: function(opt){
+             return new ScrollLoad(opt)
         },
 
         echarts: Echarts,

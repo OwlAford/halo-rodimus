@@ -6,9 +6,14 @@ export default function(router) {
 			name : 'home',
 			component: require('../mods/home.vue')
 		},
-		'/plugin/:name': {
+		'/plugin': {
 			name : 'plugin',
 			component: require('../mods/plugin.vue')
+		},
+		// example文件夹内为组件演示
+		'/toast': {
+		    name : 'toast',
+		    component: require('../mods/example/toast.vue')
 		}
 	})
 }

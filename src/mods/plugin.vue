@@ -2,7 +2,7 @@
   <article class="plugins">
     <div class="vux-list">
       <ul>
-        <li><div class="vux-list-item folder"><i class="a">toast 消息提示</i></div></li>
+        <li><div class="vux-list-item folder" v-link="{ name: 'toast' }"><i class="a">toast 消息提示</i></div></li>
         <li><div class="vux-list-item folder"><i class="b">alert 提示框</i></div></li>
         <li><div class="vux-list-item folder"><i class="c">confirm 消息确认框</i></div></li>
         <li><div class="vux-list-item folder"><i class="d">loading 加载等待层</i></div></li>
@@ -27,6 +27,9 @@
       <div class="weather">{{weather}}</div>
       <div class="device">当前设备环境为{{device}}{{weixin}}</div>
       <div class="mychart" v-el:chart></div>
+    </div>
+    <div style="width:100%" v-el:con  id="scroller">
+      <div>测试1 <br>测试1 <br>测试2 <br>测试3 <br>测试4 <br>测试5 <br>测试6 <br>测试7 <br>测试8 <br></div>
     </div>
   </article>
 </template>
@@ -108,9 +111,13 @@ export default {
     view.ppicker0 = VUX.popPicker({
       data: [VUX.province],
       onConfirm: function(data){
+        var arr = [];
+        Array.prototype.forEach.call(data, function(itm){
+          arr.push(itm.name);
+        });
         VUX.dialog({
           title: '选择结果',
-          content: data.join('-'),
+          content: arr.join('-'),
           okFn: function(){
             console.log('你点击了确认')
           },
@@ -135,11 +142,15 @@ export default {
       //       ],
       data: [VUX.province, VUX.city],
       onConfirm: function(data){
+        var arr = [];
+        Array.prototype.forEach.call(data, function(itm){
+          arr.push(itm.name);
+        });
+        console.log(arr);
         VUX.dialog({
           type: 'alert',
           title: '选择结果',
-          content: data.join('-'),
-          //content: data,
+          content: arr.join('-'),
         })
       }
     })
@@ -188,27 +199,45 @@ export default {
 
     VUX.progress.start();
     // ajax获取天气数据
-    $.ajax({
-        type: "GET",
-        url: "http://wthrcdn.etouch.cn/weather_mini?city=杭州",
-        dataType: "jsonp",
-        success: function(data){
-          view.weather = JSON.stringify(data.data);
-        },
-        complete: function(){
-          VUX.progress.done();
-          VUX.toast({
-            text: '天气加载完毕！',
-            delay: 1000
-          })
-        },
-        error: function(){  
-          VUX.toast({
-            text: '数据请求失败',
-            delay: 1000
-          })
-        }  
-      });
+    view.xhr = $.ajax({
+      type: "GET",
+      url: "http://wthrcdn.etouch.cn/weather_mini?city=杭州",
+      dataType: "jsonp",
+      success: function(data){
+        view.weather = JSON.stringify(data.data);
+      },
+      complete: function(){
+        VUX.progress.done();
+        VUX.toast({
+          text: '天气加载完毕！',
+          delay: 1000
+        })
+      },
+      error: function(){  
+        VUX.toast({
+          text: '数据请求失败',
+          delay: 1000
+        })
+      }  
+    });
+
+    // 滚动到底部加载新内容
+    var num = 0;
+    var SC = VUX.scrollLoad({
+      //fullScreen: false,
+      //container: els.con,
+      scroller: '#scroller',
+      callback: function(){
+        setTimeout(function(){
+          var dom = document.createElement('div');
+          dom.style.height = '100px';
+          dom.innerHTML = '当前设备环境为' + num;
+          num++;
+          SC.$scroller.appendChild(dom);
+          SC.refresh();
+        },3000)
+      }
+    })
 
   },
   beforeDestroy: function () {
@@ -223,6 +252,9 @@ export default {
     //this.ppicker2 = 
     this.datePicker1 = 
     this.datePicker2 = null;
+    // 取消未完成ajax请求
+    if(this.xhr) this.xhr.abort();
+    VUX.clearToast();
   },
   methods: {
     

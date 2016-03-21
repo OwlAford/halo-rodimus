@@ -74,6 +74,7 @@ export default {
   name: 'home',
   data () {
     return {
+      // 定义空列表占位
       list: [
         {title:'', url: '', tar:''},
         {title:'', url: '', tar:''},
@@ -179,28 +180,25 @@ export default {
     });
 
     // 获取列表
-    // VUX.showWaitPanel();
     VUX.progress.start();
     FB.child(UID + '/home/list').once("value", function(snapshot){
-        var data = snapshot.val(), rzt = [];
-        Object.keys(data).forEach(function(k) {
-            rzt.push(data[k]);
-        });
-        view.list = (rzt.reverse()).slice(0, 100);
+      var data = snapshot.val(), rzt = [];
+      Object.keys(data).forEach(function(k) {
+          rzt.push(data[k]);
+      });
+      view.list = (rzt.reverse()).slice(0, 100);
+      VUX.progress.done();
+    }, function(err){
+        if(errorCallback) errorCallback();
+        var errStr = "数据获取失败: " + err.code;
         //VUX.hideWaitPanel();
         VUX.progress.done();
-        //console.log(rzt);
-      }, function(err){
-          if(errorCallback) errorCallback();
-          var errStr = "数据获取失败: " + err.code;
-          //VUX.hideWaitPanel();
-          VUX.progress.done();
-          VUX.toast({
-            type: 'error',
-            text: errStr,
-            delay: 1600
-          })
-      });
+        VUX.toast({
+          type: 'error',
+          text: errStr,
+          delay: 1600
+        })
+    });
 
     // $('#btn').on('click', function(){
     //   VUX.router.go({

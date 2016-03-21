@@ -22,6 +22,7 @@
 
 <style src="../../assets/css/global.css"></style>
 <style src="../../assets/css/border.css"></style>
+<style src="../../assets/css/scrollLoad.css"></style>
 <style src="../../assets/css/nprogress.css"></style>
 <style src="../../assets/css/swiper.css"></style>
 <style src="../../assets/css/scroller.css"></style>
