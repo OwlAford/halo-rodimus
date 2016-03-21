@@ -13,6 +13,7 @@
         <li><div class="vux-list-item folder"><i class="i">swiper 轮播图组件</i></div></li>
         <li><div class="vux-list-item folder"><i class="j">progress 加载组件</i></div></li>
         <li><div class="vux-list-item folder"><i class="k">storage 数据存储</i></div></li>
+        <li><div class="vux-list-item folder"><i class="l">scrollLoad 滚动加载组件</i></div></li>
       </ul>
 
     </div>
@@ -49,6 +50,7 @@
 .plugins .vux-list i.i:after{content:'\e612'; color:#00c193;}
 .plugins .vux-list i.j:after{content:'\e61d'; color:#4798f3;}
 .plugins .vux-list i.k:after{content:'\e61c'; color:#ffa626;}
+.plugins .vux-list i.l:after{content:'\e61f'; color:#f97664;}
 /*================================================================*/
 .wrap1{padding:10px;}
 .mychart{width:100%; height:300px;}
