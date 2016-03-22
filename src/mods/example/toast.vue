@@ -33,7 +33,7 @@ export default {
 
     // 初始化头部
     VUX.setHeader({
-      title: 'toast组件'
+      title: 'toast 组件'
     })
 
     view.ppicker = VUX.popPicker({

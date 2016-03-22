@@ -20,7 +20,6 @@ export default (function () {
         me.default = {
             container: '.swiper', 
             item: '.item', 
-            direction: 'vertical', 
             activeClass: 'active', 
             ratio: null,
             observer: true,

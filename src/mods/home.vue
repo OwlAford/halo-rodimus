@@ -9,9 +9,9 @@
       </div>    
     </div>
     <div class="channel vux-flexbox ui-border-b">
-      <i class="vux-flexbox-item a">级联选择</i>
-      <i class="vux-flexbox-item b">统计图</i>
-      <i class="vux-flexbox-item c">日历选择</i>
+      <i class="vux-flexbox-item a" v-link="{name: 'plugin'}">级联选择</i>
+      <i class="vux-flexbox-item b" v-link="{name: 'chart'}">统计图</i>
+      <i class="vux-flexbox-item c" v-link="{name: 'plugin'}">日历选择</i>
     </div>
     <div class="essay">
       <h1 class="title row">
@@ -199,41 +199,6 @@ export default {
           delay: 1600
         })
     });
-
-    // $('#btn').on('click', function(){
-    //   VUX.router.go({
-    //     name: 'plugin',
-    //     params: {
-    //       name: 'aford'
-    //     }
-    //   });
-
-    //   VUX.storage.set('userifo', {
-    //     pswd: '我保存了一个小秘密',
-    //     name: '但是我就是不告诉你'
-    //   });
-
-    // })
-
-    // VUX.toast({
-    //   type: 'success',
-    //   text: '欢迎使用 VUX 移动前端开发框架',
-    //   delay: 2000
-    // })
-    
-    // $('#dialog').on('click', function(){
-    //   VUX.dialog({
-    //     type: 'confirm',
-    //     title: '弹框测试',
-    //     content: '我是一大段弹框测试文本内容',
-    //     okFn: function(){
-    //       console.log('确认成功');
-    //     },
-    //     cancelFn: function(){
-    //       console.log('取消成功');
-    //     }
-    //   })
-    // })
 
   }
   

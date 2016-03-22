@@ -1,6 +1,6 @@
 /* 页面滚动加载 */
 
-var TEMPLATE = '<div class="scrollLoadState"><span><div class="loader"></div>正在加载中</span></div>';
+var TEMPLATE = '<div class="scrollLoadState"><span><div class="sc-spinner"><div class="sc-spinner-icon"></div></div>正在加载中</span></div>';
 
 // 获取元素
 function getElement(expr) {
