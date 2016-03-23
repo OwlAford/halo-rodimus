@@ -73,7 +73,6 @@ export default {
       dataType: "jsonp",
       success: function(data){
         view.weather = data.data;
-        console.log(data.data);
       },
       complete: function(){
         VUX.progress.done();

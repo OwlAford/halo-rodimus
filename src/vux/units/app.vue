@@ -73,11 +73,14 @@ export default {
     /* 
      * ## 定义一个全局toast方法，包含报错提示、操作提示、成功提示三种常用方式
      * text  --> 为必填，为提示文本内容； 
-     * delay --> 为显示时间，默认为3000ms，选填
+     * delay --> 为显示时间，默认为3000ms，参数不得小于1000ms，选填；
      * type  --> 提示类型('error','success')，默认为操作提示，选填；
      */
     VUX.toast = function(opt){
-      var time = opt.delay || 3000;
+      var time = 3000;
+      if(opt.delay){
+        opt.delay < 1000 ? time = 1000 : time = opt.delay;
+      }
       var clsName = 'toast ';
       if(opt.text.length > 18) clsName += 'break ';
       if(opt.type) clsName += opt.type;

@@ -19,6 +19,7 @@
   </article>
 </template>
 <style>
+.plugins{margin-bottom:0.2rem;}
 .plugins .vux-list li{padding:0 0.3rem; font-size:0.26rem;}
 .plugins .vux-list li >.vux-list-item{padding:0.24rem 0;}
 .plugins .vux-list i{padding-left:0.58rem;}

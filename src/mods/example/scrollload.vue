@@ -1,12 +1,12 @@
 <template>
   <article>
     <div class="vux-list" id="scroller">
-      <ul v-el:container>
+      <ul v-el:ul>
         <li  v-for="itm in citys"><div class="vux-list-item">{{itm.name}}</div></li>
         <li>
           <div id="innerScroll">
             <div class="vux-list" id="scroller2">
-              <ul id="inserted">
+              <ul id="ul2">
                 <li  v-for="itm in citys"><div class="vux-list-item">{{itm.name}}</div></li>
               </ul>
             </div>
@@ -37,8 +37,12 @@ export default {
 
     // 初始化头部
     VUX.setHeader({
-      title: 'scrollLoad 组件'
+      title: 'scrollLoad 组件',
+      leftTpl: 'back'
     })
+
+    // 隐藏底部
+    VUX.showFooter(false);
 
     // 获取演示所需的城市数据
     VUX.progress.start();
@@ -67,9 +71,10 @@ export default {
       threshold: 100,
       scroller: '#scroller', // 滚动主体不能为当前模板页及其父节点
       callback: function(){
-        view.addChild(SC, view.$els.container);
+        view.addChild(SC, view.$els.ul);
       }
     })
+    view.sc = SC;
 
     // 局部滚动加载
     var SC1 = VUX.scrollLoad({
@@ -78,20 +83,24 @@ export default {
       threshold: 100,
       scroller: '#scroller2', // 滚动主体不能为当前模板页及其父节点
       callback: function(){
-        view.addChild(SC1, document.getElementById('inserted'));
+        view.addChild(SC1, document.getElementById('ul2'));
       }
     })
+    view.sc1 = SC1;
     
   },
 
   beforeDestroy: function () {
-    // 跳转时必须销毁滚动加载插件
+    // 跳转时必须销毁滚动加载插件以及清除定时器
+    this.sc.destroy();
+    this.sc1.destroy();
+    clearTimeout(this.timer);
   },
 
   methods: {
     addChild: function(instance, inserted){
-      var num = 0;
-      setTimeout(function(){
+      var num = 0, view = this;
+      view.timer = setTimeout(function(){
         for(var i = 0; i < 12; i++){
           var dom = document.createElement('li');
           dom.innerHTML = '<div class="vux-list-item">新增子元素节点为' + num + '</div>';
@@ -99,6 +108,7 @@ export default {
           inserted.appendChild(dom);
         }
         instance.refresh();
+        clearTimeout(view.timer);
       },3000)
     }
   }

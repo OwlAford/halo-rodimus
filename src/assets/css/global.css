@@ -45,15 +45,6 @@ i:after,
   100%{opacity:0;}
 }
 
-@-webkit-keyframes fadeInUpToast{
-  0%{opacity:0; -webkit-transform:translate3d(-50%, 100%, 0); transform:translate3d(-50%, 100%, 0);}
-  100%{opacity:1; -webkit-transform:translate3d(-50%, -50%, 0); transform:translate3d(-50%, -50%, 0);}
-}
-@keyframes fadeInUpToast{
-  0%{opacity:0; -webkit-transform:translate3d(-50%, 100%, 0); transform:translate3d(-50%, 100%, 0);}
-  100%{opacity:1; -webkit-transform:translate3d(-50%, -50%, 0); transform:translate3d(-50%, -50%, 0);}
-}
-
 @-webkit-keyframes fadeInUpDialog{
   0%{opacity:0; -webkit-transform:translate3d(-50%, 100%, 0) scale3d(.5, .5, .5); transform:translate3d(-50%, 100%, 0) scale3d(.5, .5, .5);}
   100%{opacity:1; -webkit-transform:translate3d(-50%, -50%, 0) scale3d(1, 1, 1); transform:translate3d(-50%, -50%, 0) scale3d(1, 1, 1);}
@@ -110,7 +101,7 @@ i:after,
 .row >.cell{-webkit-box-flex:1; box-flex:1;}
 
 /* tosat */
-i.toast{padding:0.12rem 0.2rem 0.12rem 0.68rem; font-size:0.26rem; display:block; max-width:90%; background-color:rgba(0,0,0,.5); color:#fff; border-radius:0.08rem; z-index:999; position:fixed; left:50%; top:50%; transform:translate3d(-50%, -50%, 0); -webkit-transform:translate3d(-50%, -50%, 0); animation:fadeInUpToast .3s; -webkit-animation:fadeInUpToast .3s; white-space:nowrap; overflow:hidden;}
+i.toast{padding:0.12rem 0.2rem 0.12rem 0.68rem; font-size:0.26rem; display:block; max-width:90%; background-color:rgba(0,0,0,.5); color:#fff; border-radius:0.08rem; z-index:999; position:fixed; left:50%; top:50%; transform:translate3d(-50%, -50%, 0); -webkit-transform:translate3d(-50%, -50%, 0); animation:fadeIn .4s .2s; -webkit-animation:fadeIn .4s .2s; white-space:nowrap; overflow:hidden; opacity:0; animation-fill-mode:forwards; -webkit-animation-fill-mode:forwards;}
 i.toast.break{width:80%; white-space:normal;}
 i.toast:after{content:'\e619'; font-size:0.36rem; position:absolute; left:0.16rem; top:50%; margin-top:-0.16rem;}
 i.toast.error:after{content:'\e618';}

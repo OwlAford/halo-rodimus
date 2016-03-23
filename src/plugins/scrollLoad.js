@@ -83,7 +83,7 @@ scrollLoad.prototype = {
     var distance = scrollerHeight - scrollTop - me.containerHeight; 
     var threshold = me.opts.threshold;
     // 若为全屏滚动
-    me.opts.fullScreen && VUX.footerHeight ? threshold += VUX.footerHeight : null;
+    me.opts.fullScreen && VUX.footerShowState ? threshold += VUX.footerHeight : null;
     if(distance < threshold && me.flag){
       me.flag = false;
       me.$tip.classList.add('show');
@@ -110,7 +110,6 @@ scrollLoad.prototype = {
       me.$container.classList.remove('autoHeight');
       me.$container = null;
     }
-    me.scrollFn = null;
   }
 }
 

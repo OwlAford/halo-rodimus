@@ -66,7 +66,7 @@ export default {
       var view = this;
       VUX.toast({
         text: view.$els.txt.value || '欢迎使用 vux',
-        delay: 3000,
+        delay: 2000,
         type: view.typeParam
       })
     }
