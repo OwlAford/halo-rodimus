@@ -54,8 +54,6 @@ export default {
     var view = this;
     var els = view.$els;
 
-    // if(VUX.device.weixin) view.weixin = '微信';
-
     VUX.setHeader({
       title: '组件',
       leftTpl: 'back'

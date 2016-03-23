@@ -4,7 +4,7 @@
       <i v-link="{ name: 'home', activeClass: 'active' }">展示</i>
       <i v-link="{ name: 'plugin', activeClass: 'active' }">组件</i>
       <i>UI元件</i>
-      <i>文档</i>
+      <i v-link="{ name: 'doc', activeClass: 'active' }">文档</i>
     </div>
   </footer>
 </template>

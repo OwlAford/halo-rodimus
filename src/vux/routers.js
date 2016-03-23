@@ -10,6 +10,10 @@ export default function(router) {
 			name : 'plugin',
 			component: require('../mods/plugin.vue')
 		},
+		'/doc': {
+			name : 'doc',
+			component: require('../mods/doc.vue')
+		},
 		// example文件夹内为组件演示
 		'/toast': {
 		    name : 'toast',
