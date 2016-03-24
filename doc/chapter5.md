@@ -172,6 +172,8 @@ var myScroller = VUX.scroller([element], {
 
 **刷新容器：** `myScroller.refresh()`
 
+**结束滚动加载触发：** `myScroller.done()`
+
 **实例1：**
 
  <pre>var myScrollLoad = VUX.scrollLoad({

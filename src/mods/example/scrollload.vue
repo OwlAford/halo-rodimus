@@ -108,6 +108,7 @@ export default {
           inserted.appendChild(dom);
         }
         instance.refresh();
+        // instance.done(); 若不再触发加载，则调用该方法
         clearTimeout(view.timer);
       },3000)
     }

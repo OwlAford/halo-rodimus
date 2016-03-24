@@ -103,6 +103,11 @@ scrollLoad.prototype = {
     }, false);
   },
 
+  done: function(){
+    this.flag = false;
+    this.$tip.classList.remove('show');
+  },
+
   destroy: function(){
     var me = this;
     me.$tip.parentNode.removeChild(me.$tip);
