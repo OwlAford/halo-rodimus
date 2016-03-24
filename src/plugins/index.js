@@ -36,12 +36,12 @@ import 'echarts/lib/component/tooltip';
 
         device: Device,
 
-        swiper: function(opt){
-             return new Swiper(opt)
+        swiper: function(options){
+             return new Swiper(options)
         },
 
-        scrollLoad: function(opt){
-             return new ScrollLoad(opt)
+        scrollLoad: function(options){
+             return new ScrollLoad(options)
         },
 
         echarts: Echarts,
@@ -51,17 +51,7 @@ import 'echarts/lib/component/tooltip';
         },
 
         datePicker: function(options){
-            var opt = {
-                yearRow: '{value}年',
-                monthRow: '{value}月',
-                dayRow: '{value}日',
-                hourRow: '{value}点',
-                minuteRow: '{value}分'
-            };
-            for(var key in options){
-                opt[key] = options[key];
-            }
-            return new DatePicker(opt)
+            return new DatePicker(options)
         },
 
         popPicker: function(options){
