@@ -90,7 +90,7 @@ export default {
     
   },
 
-  beforeDestroy: function () {
+  beforeDestroy () {
     // 跳转时必须销毁滚动加载插件以及清除定时器
     this.sc.destroy();
     this.sc1.destroy();

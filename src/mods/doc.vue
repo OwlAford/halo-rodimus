@@ -34,14 +34,6 @@ export default {
       VUX.progress.done();
     }
 
-  },
-
-  beforeDestroy: function () {
-   
-  },
-
-  methods: {
-    
   }
 }
 </script>

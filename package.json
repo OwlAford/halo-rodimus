@@ -17,6 +17,7 @@
     "babel-preset-stage-0": "^6.1.18",
     "babel-runtime": "^6.2.0",
     "css-loader": "^0.23.1",
+    "dynamics.js": "0.0.9",
     "expose-loader": "^0.7.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",

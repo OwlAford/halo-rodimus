@@ -53,7 +53,7 @@ export default {
     })
   },
 
-  beforeDestroy: function () {
+  beforeDestroy () {
     // 跳转时必须销毁 级联选择插件
     this.ppicker.destroy();
   },

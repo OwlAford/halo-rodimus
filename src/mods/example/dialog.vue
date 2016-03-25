@@ -35,9 +35,6 @@ export default {
     view.type = view.$route.params.type;
   },
 
-  beforeDestroy: function () {
-  },
-
   methods: {
     fireDialog: function(){
       var view = this;

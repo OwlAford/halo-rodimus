@@ -46,6 +46,10 @@ export default function(router) {
 		'/scrollload': {
 		    name : 'scrollload',
 		    component: require('../mods/example/scrollload.vue')
+		},
+		'/elastic': {
+		    name : 'elastic',
+		    component: require('../mods/example/elastic.vue')
 		}
 	})
 }

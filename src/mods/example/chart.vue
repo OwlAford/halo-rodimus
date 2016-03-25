@@ -59,10 +59,6 @@ export default {
     view.renderPie(pie);
   },
 
-  beforeDestroy: function () {
-    
-  },
-
   methods: {
     renderLine: function(el){
       var myLine = VUX.echarts.init(el);

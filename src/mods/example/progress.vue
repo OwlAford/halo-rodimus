@@ -91,7 +91,7 @@ export default {
     
   },
 
-  beforeDestroy: function () {
+  beforeDestroy () {
     // 取消未完成ajax请求
     if(this.xhr) this.xhr.abort();
     VUX.clearToast();

@@ -16,8 +16,8 @@
         <div class="item"><div class="text" style="background-color:#FFA626">玉盘珍羞直万钱</div></div>
         <div class="item"><div class="text" style="background-color:#F97664">停杯投箸不能食</div></div>
         <div class="item"><div class="text" style="background-color:#4798F3">拔剑四顾心茫然</div></div>
-        <div class="item"><div class="text" style="background-color:#4798F3">欲渡黄河冰塞川</div></div>
-        <div class="item"><div class="text" style="background-color:#4798F3">将登太行雪满山</div></div>
+        <div class="item"><div class="text" style="background-color:#ffa626">欲渡黄河冰塞川</div></div>
+        <div class="item"><div class="text" style="background-color:#967db3">将登太行雪满山</div></div>
       </div>
     </div>   
     <h1>当前诗句：{{text}}</h1>

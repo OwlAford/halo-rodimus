@@ -20,10 +20,10 @@
   </div>
 </template>
 
-<style src="../../assets/css/global.css"></style>
-<style src="../../assets/css/border.css"></style>
+<style src="../../assets/css/global.css"></style> <!-- 基础全局样式 -->
+<style src="../../assets/css/border.css"></style> <!-- 1px border 解决方案 -->
 <style src="../../assets/css/scrollLoad.css"></style>
-<style src="../../assets/css/nprogress.css"></style>
+<style src="../../assets/css/nprogress.css"></style> 
 <style src="../../assets/css/swiper.css"></style>
 <style src="../../assets/css/scroller.css"></style>
 <style src="../../assets/css/datetimepicker.css"></style>

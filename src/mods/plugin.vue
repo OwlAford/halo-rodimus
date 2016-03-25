@@ -14,6 +14,7 @@
         <li><div class="vux-list-item folder" v-link="{name: 'progress'}"><i class="j">progress 加载组件</i></div></li>
         <li><div class="vux-list-item folder" v-link="{name: 'storage'}"><i class="k">storage 数据存储</i></div></li>
         <li><div class="vux-list-item folder" v-link="{name: 'scrollload'}"><i class="l">scrollLoad 滚动加载组件</i></div></li>
+        <li><div class="vux-list-item folder" v-link="{name: 'elastic'}"><i class="h">elastic弹性演示</i></div></li>
       </ul>
     </div>
   </article>
@@ -112,7 +113,7 @@ export default {
 
   },
 
-  beforeDestroy: function () {
+  beforeDestroy () {
     // 页面跳转前必须销毁已调用滚动插件
     this.pickdate.destroy();
     this.cascade && this.cascade.destroy();
