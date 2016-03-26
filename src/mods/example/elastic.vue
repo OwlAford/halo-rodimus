@@ -79,9 +79,10 @@ export default {
     // 隐藏底部
     VUX.showFooter(false);
 
-    // this.$els.elastic.addEventListener('touchmove', function (e) {
-    //   e.preventDefault()
-    // })
+    // 屏蔽默认触摸事件
+    this.$els.elastic.addEventListener('touchmove', function (e) {
+      e.preventDefault()
+    })
   },
 
   compiled () {
