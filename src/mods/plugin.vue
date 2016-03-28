@@ -2,6 +2,7 @@
   <article class="plugins">
     <div class="vux-list">
       <ul>
+        <li><div class="vux-list-item"><i class="n">当前系统环境：{{os}} {{platform}}</i></div></li>
         <li><div class="vux-list-item folder" v-link="{name: 'toast'}"><i class="a">toast 消息提示</i></div></li>
         <li><div class="vux-list-item folder" v-link="{path: '/dialog/alert'}"><i class="b">alert 提示框</i></div></li>
         <li><div class="vux-list-item folder" v-link="{path: '/dialog/confirm'}"><i class="c">confirm 消息确认框</i></div></li>
@@ -14,7 +15,7 @@
         <li><div class="vux-list-item folder" v-link="{name: 'progress'}"><i class="j">progress 加载组件</i></div></li>
         <li><div class="vux-list-item folder" v-link="{name: 'storage'}"><i class="k">storage 数据存储</i></div></li>
         <li><div class="vux-list-item folder" v-link="{name: 'scrollload'}"><i class="l">scrollLoad 滚动加载组件</i></div></li>
-        <li><div class="vux-list-item folder" v-link="{name: 'elastic'}"><i class="h">elastic弹性演示</i></div></li>
+        <li><div class="vux-list-item folder" v-link="{name: 'elastic'}"><i class="m">elastic弹性演示</i></div></li>
       </ul>
     </div>
   </article>
@@ -37,6 +38,8 @@
 .plugins .vux-list i.j:after{content:'\e61d'; color:#4798f3;}
 .plugins .vux-list i.k:after{content:'\e61c'; color:#ffa626;}
 .plugins .vux-list i.l:after{content:'\e61f'; color:#f97664;}
+.plugins .vux-list i.m:after{content:'\e623'; color:#967db3;}
+.plugins .vux-list i.n:after{content:'\e622'; color:#f97664;}
 
 </style>
 <script>
@@ -47,7 +50,8 @@ export default {
 
   data () {
     return {
-
+      os: VUX.device.os,
+      platform: '浏览器'
     }
   },
 
@@ -59,6 +63,9 @@ export default {
       title: '组件',
       leftTpl: 'back'
     })
+
+    // 判断是否为微信
+    VUX.device.weixin ? view.platform = '微信' : view.platform = '浏览器';
 
     // 获取省市地数据
     VUX.progress.start();
