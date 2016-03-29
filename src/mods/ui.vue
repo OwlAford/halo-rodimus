@@ -59,7 +59,7 @@
   </article>
 </template>
 <style>
-.vux-list + .vux-list{margin-top:0.2rem;}
+.vux-list + .vux-list{margin:0.2rem 0;}
 </style>
 <script>
 

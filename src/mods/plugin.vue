@@ -130,6 +130,9 @@ export default {
     // 取消未完成ajax请求
     if(this.xhr) this.xhr.abort();
     VUX.clearToast();
+
+    // 结束未完成加载进度
+    VUX.progress.done();
   },
 
   methods: {
