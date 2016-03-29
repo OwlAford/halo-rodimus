@@ -3,9 +3,7 @@
     <iframe src="https://owlaford.gitbooks.io/vux-mobile-framework/content/index.html" style="width:100%; display:block; margin:0; padding:0" frameborder="0" v-el:frame></iframe>
   </article>
 </template>
-<style>
 
-</style>
 <script>
 
 export default {

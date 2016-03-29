@@ -10,6 +10,10 @@ export default function(router) {
 			name : 'plugin',
 			component: require('../mods/plugin.vue')
 		},
+		'/ui': {
+			name : 'ui',
+			component: require('../mods/ui.vue')
+		},
 		'/doc': {
 			name : 'doc',
 			component: require('../mods/doc.vue')

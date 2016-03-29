@@ -31,7 +31,7 @@
 </template>
 <style scoped>
 .progress{padding:0.2rem 0.2rem 0.4rem; background-color:#fff;}
-.weather{margin:0.2rem 0 0.4rem; font-size:0.26rem;}
+.weather{margin:0.2rem 0 0.4rem; font-size:0.24rem;}
 .weather th{background-color:#f2f2f2;}
 .weather th,.weather td{padding:0.16rem 0.2rem;}
 .weather tr:nth-child(odd) td{background-color:#f9f9f9;}
