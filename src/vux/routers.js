@@ -50,6 +50,10 @@ export default function(router) {
 		'/elastic': {
 		    name : 'elastic',
 		    component: require('../mods/example/elastic.vue')
+		},
+		'/circle': {
+		    name : 'circle',
+		    component: require('../mods/example/circle.vue')
 		}
 	})
 }

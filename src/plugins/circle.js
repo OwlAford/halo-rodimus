@@ -27,6 +27,7 @@ function circle(elem, options){
 circle.prototype = {
 	create: function(){
 		var me = this;
+		var cnt = me.container;
 		var edge = me.opts.edge;
 		var circleWidth = me.opts.circleWidth;
 		var cx = edge*0.5;
@@ -36,14 +37,14 @@ circle.prototype = {
 		var ANIMATE = '';
 		me.opts.transition ? ANIMATE = 'transition:stroke-dashoffset '+ me.opts.during +'ms linear;' : null;
 
-		var  template = '<svg width="'+ edge +'" height="'+ edge +'">' +
-							'<circle cx="'+ cx +'" cy="'+ cx +'" r="'+ r  +'" fill="#FFF" stroke="'+ me.opts.circleColor +'" stroke-width="'+ (circleWidth-1) +'"></circle>' +
-							'<circle class="sec-circle" style="stroke-dashoffset:0; stroke-dasharray:'+ l +'; '+ ANIMATE +' stroke-dashoffset: '+ -l*me.opts.initial +'" cx="'+ cx +'" cy="'+ cx +'" r="'+ r  +'" fill="transparent" stroke="'+ me.opts.bgColor +'" stroke-width="'+ circleWidth +'" transform="rotate(-90 '+ cx +' '+ cx +')"></circle>' +
-						'</svg>';
+		var  template = '<svg width="'+ edge +'" height="'+ edge +'"> \
+							<circle cx="'+ cx +'" cy="'+ cx +'" r="'+ r  +'" fill="#FFF" stroke="'+ me.opts.circleColor +'" stroke-width="'+ (circleWidth-1) +'"></circle> \
+							<circle class="sec-circle" style="stroke-dashoffset:0; stroke-dasharray:'+ l +'; '+ ANIMATE +' stroke-dashoffset: '+ -l*me.opts.initial +'" cx="'+ cx +'" cy="'+ cx +'" r="'+ r  +'" fill="transparent" stroke="'+ me.opts.bgColor +'" stroke-width="'+ circleWidth +'" transform="rotate(-90 '+ cx +' '+ cx +')"></circle> \
+						</svg>';
 
-		this.container.innerHTML = template;
+		cnt.innerHTML = template;
 
-		this.circle = obj.getElementsByClassName('sec-circle')[0];
+		this.circle = cnt.getElementsByClassName('sec-circle')[0];
 	},
 
 	set: function(num){

@@ -162,5 +162,6 @@ i.toast.success:after{content:'\e617';}
 .vux-btn{display:block; padding:0.24rem 0; text-align:center; color:#fff; background-color:#007aff; width:100%; border-radius:0.06rem; transition:all ease .3s; -webkit-box-shadow:0 0 0 0.96rem rgba(0,0,0,0) inset; box-shadow:0 0 0 0.96rem rgba(0,0,0,0) inset;}
 .vux-btn.red{background-color:#dd524d;}
 .vux-btn:not(.disabled):not(:disabled):active{-webkit-box-shadow:0 0 0 0.96rem rgba(0,0,0,0.16) inset; box-shadow:0 0 0 0.96rem rgba(0,0,0,0.16) inset;}
+.vux-btn.disabled{background-color:#ddd;}
 *:not(.vux-btn) + .vux-btn{margin-top:0.4rem;}
 .vux-btn + .vux-btn{margin-left:0.2rem;}

@@ -6,16 +6,17 @@
         <li><div class="vux-list-item folder" v-link="{name: 'toast'}"><i class="a">toast 消息提示</i></div></li>
         <li><div class="vux-list-item folder" v-link="{path: '/dialog/alert'}"><i class="b">alert 提示框</i></div></li>
         <li><div class="vux-list-item folder" v-link="{path: '/dialog/confirm'}"><i class="c">confirm 消息确认框</i></div></li>
-        <li><div class="vux-list-item folder" @click="triggerLoading"><i class="d">loading 加载等待层 (演示3秒)</i></div></li>
+        <li><div class="vux-list-item" @click="triggerLoading"><i class="d">loading 加载等待层 (演示3秒)</i></div></li>
         <li><div class="vux-list-item folder" v-link="{name: 'chart'}"><i class="e">eCharts 统计图表插件</i></div></li>
         <li><div class="vux-list-item folder" v-link="{name: 'scroller'}"><i class="h">scroller 滑动选择</i></div></li>
-        <li><div class="vux-list-item folder" @click="triggerCascade"><i class="f">poppicker 弹出省市地级联选择框</i></div></li>
-        <li><div class="vux-list-item folder" v-el:pickdate><i class="g">datetimepicker 日期时间选择</i></div></li>
+        <li><div class="vux-list-item" @click="triggerCascade"><i class="f">poppicker 弹出省市地级联选择框</i></div></li>
+        <li><div class="vux-list-item" v-el:pickdate><i class="g">datetimepicker 日期时间选择</i></div></li>
         <li><div class="vux-list-item folder" v-link="{name: 'swiper'}"><i class="i">swiper 轮播图组件</i></div></li>
         <li><div class="vux-list-item folder" v-link="{name: 'progress'}"><i class="j">progress 加载组件</i></div></li>
         <li><div class="vux-list-item folder" v-link="{name: 'storage'}"><i class="k">storage 数据存储</i></div></li>
         <li><div class="vux-list-item folder" v-link="{name: 'scrollload'}"><i class="l">scrollLoad 滚动加载组件</i></div></li>
         <li><div class="vux-list-item folder" v-link="{name: 'elastic'}"><i class="m">elastic弹性演示</i></div></li>
+        <li><div class="vux-list-item folder" v-link="{name: 'circle'}"><i class="o">circle圆环进度组件</i></div></li>
       </ul>
     </div>
   </article>
@@ -40,6 +41,7 @@
 .plugins .vux-list i.l:after{content:'\e61f'; color:#f97664;}
 .plugins .vux-list i.m:after{content:'\e623'; color:#967db3;}
 .plugins .vux-list i.n:after{content:'\e622'; color:#f97664;}
+.plugins .vux-list i.o:after{content:'\e624'; color:#91c66a;}
 
 </style>
 <script>
