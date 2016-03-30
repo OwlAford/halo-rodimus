@@ -14,9 +14,9 @@
           <td>{{itm.date | formatStr}}</td>
           <td>{{itm.fengxiang}}</td>
           <td>{{itm.fengli}}</td>
-          <td>{{itm.high | formatStr}}</td>
+          <td>{{itm.high | formatTmp}}</td>
           <td>{{itm.type}}</td>
-          <td>{{itm.low | formatStr}}</td>
+          <td>{{itm.low | formatTmp}}</td>
         </tr>
         <tr>
         <td colspan="6">温馨提示：{{weather.ganmao}}</td>
@@ -41,11 +41,16 @@
 
 //自定义过滤器
 function formatStr(m){
-  var str = m.substring(3);
+  var str = m.split('日')[1];
   return str;
 }
 
+function formatTmp(s){
+  return s.substring(3);
+}
+
 Vue.filter('formatStr', formatStr)
+Vue.filter('formatTmp', formatTmp)
 
 export default {
   name: 'progress',
@@ -95,6 +100,7 @@ export default {
     // 取消未完成ajax请求
     if(this.xhr) this.xhr.abort();
     VUX.clearToast();
+    VUX.progress.done();
   },
 
   methods: {

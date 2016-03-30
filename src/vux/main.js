@@ -69,6 +69,7 @@ router.beforeEach(function () {
 	VUX.clearToast();
 	VUX.hideWaitPanel();
 	VUX.clearDialog();
+	VUX.progress.done();
 });
 router.redirect({
   '*': '/home'
