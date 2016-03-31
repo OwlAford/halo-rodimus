@@ -11,23 +11,27 @@
   border-bottom: #e2e2e2 1px solid;
   background-image: none; }
 
-.ui-border-l {
+.ui-border-l, {
   border-left: 1px solid #e2e2e2; }
 
-.ui-border-r {
+.ui-border-r,
+.vux-counter i.minus {
   border-right: 1px solid #e2e2e2; }
 
 .ui-border {
   border: 1px solid #e2e2e2; }
 
-.ui-border-radius {
+.ui-border-radius,
+.vux-counter {
   border: 1px solid #e2e2e2;
   border-radius: 4px; }
   @media screen and (-webkit-min-device-pixel-ratio: 2) {
-    .ui-border-radius {
+    .ui-border-radius,
+    .vux-counter {
       position: relative;
       border: 0; }
-      .ui-border-radius:before {
+      .ui-border-radius:before,
+      .vux-counter:before {
         content: "";
         width: 200%;
         height: 200%;
@@ -47,7 +51,7 @@
     position: relative;
     border: 0; }
 
-  .ui-border-t, .vux-list-item + .vux-list-item, li + li >.vux-list-item, .ui-border-b, .ui-border-l, .ui-border-r, .ui-border-tb, .vux-list {
+  .ui-border-t, .vux-list-item + .vux-list-item, li + li >.vux-list-item, .ui-border-b, .ui-border-l, .vux-counter i.add, .ui-border-r, .vux-counter i.minus, .ui-border-tb, .vux-list {
     border: 0; }
 
   .ui-border-t, .vux-list-item + .vux-list-item, li + li >.vux-list-item {
@@ -72,16 +76,20 @@
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.5, transparent), color-stop(0.5, #e2e2e2)), -webkit-gradient(linear, left top, left bottom, color-stop(0.5, transparent), color-stop(0.5, #e2e2e2));
     background-position: top, bottom; }
 
-  .ui-border-l {
+  .ui-border-l,
+  .vux-counter i.add {
     background-position: left top;
     background-image: -webkit-gradient(linear, right top, left top, color-stop(0.5, transparent), color-stop(0.5, #e2e2e2)); }
 
-  .ui-border-r {
+  .ui-border-r,
+  .vux-counter i.minus {
     background-position: right top;
     background-image: -webkit-gradient(linear, left top, right top, color-stop(0.5, transparent), color-stop(0.5, #e2e2e2)); }
 
   .ui-border-l,
-  .ui-border-r {
+  .vux-counter i.add,
+  .ui-border-r,
+  .vux-counter i.minus {
     background-repeat: repeat-y;
     -webkit-background-size: 1px 100%; }
 

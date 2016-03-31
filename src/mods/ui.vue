@@ -55,7 +55,16 @@
       </div>
       <div class="vux-list-item">最后选择结果为：{{picked}}</div>
     </div>
-
+    <div class="vux-list">
+      <div class="vux-list-item">
+        <span>选择数量：</span>
+        <div class="vux-counter">
+          <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" :value="counter | formatNumber" @blur="set">
+          <i class="add" @click="add"></i>
+          <i class="minus" @click="minus"></i>
+        </div>
+      </div>
+    </div>
   </article>
 </template>
 <style>
@@ -70,7 +79,8 @@ export default {
     return {
       switch: false,
       checked: false,
-      checkedNames: []
+      checkedNames: [],
+      counter: 1
     }
   },
 
@@ -88,6 +98,15 @@ export default {
   methods: {
     triggerSwitch: function(){
       this.switch ? this.switch = false : this.switch = true;
+    },
+    add: function(){
+      this.counter++
+    },
+    minus: function(){
+      this.counter--
+    },
+    set: function(e){
+      this.counter = e.target.value;
     }
   }
 }
