@@ -1,4 +1,4 @@
-.swiper{-webkit-transition:all .3s ease; transition:all .3s ease; width:100%; overflow:hidden; height:100%; display:-webkit-box; display:-o-box; display:-ms-flexbox; display:-webkit-flex; display:flex; -webkit-box-align:center; -webkit-align-items:center;}
+.swiper{-webkit-transition:-webkit-transform .3s ease; transition:transform .3s ease; width:100%; overflow:hidden; height:100%; display:-webkit-box; display:-o-box; display:-ms-flexbox; display:-webkit-flex; display:flex; -webkit-box-align:center; -webkit-align-items:center;}
 .swiper .item{position:relative; height:100%; overflow:hidden; -webkit-box-flex:1; -o-box-flex:1; -ms-flex:1; -webkit-flex:1; flex:1;}
 .swiper .item.active .animated{-webkit-animation-fill-mode:both; animation-fill-mode:both; opacity:1;}
 .swiper .item:not(.active) .animated{-webkit-animation:none; animation:none; opacity:0;}

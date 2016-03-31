@@ -168,8 +168,8 @@ export default (function () {
 
         var duration = this.options.duration + 'ms';
 
-        this.$container.style['-webkit-transition'] = duration;
-        this.$container.style.transition = duration;
+        this.$container.style['-webkit-transition'] = '-webkit-transform '+ duration;
+        this.$container.style.transition = 'transform '+  duration;
         this.$container.style['-webkit-transform'] = transform;
         this.$container.style.transform = transform;
     };
