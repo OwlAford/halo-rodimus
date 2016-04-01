@@ -103,6 +103,7 @@ export default {
       this.counter++
     },
     minus: function(){
+      if(this.counter == 0) return;
       this.counter--
     },
     set: function(e){
