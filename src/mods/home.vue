@@ -50,10 +50,9 @@
 .essay .title{padding:0.14rem 0; line-height:0.42rem;}
 .essay .title i{display:block;}
 .essay .title i.cell{padding-left:0.4rem;}
-.essay .title i.cell:after{content:'\e613'; font-size:0.32rem; position:absolute; color:#33383a; left:0; top:50%; margin-top:-0.18rem;}
+.essay .title i.cell:after{content:'\e613'; font-size:0.32rem; position:absolute; color:#33383a; left:0; top:50%; margin-top:-0.16rem;}
 .essay .title i.cell.c:after{content:'\e61e';}
 .essay .title i.more{font-size:0.24rem; color:#545453;}
-.essay .title i.more:after{content:'\e61a'; font-size:0.22rem; color:#545453; vertical-align:middle; margin-top:-0.04rem;}
 .essay .chart{height:2.4rem;}
 .essay .grid{width:100%; min-height:1rem; font-size:0;}
 .essay .grid li{height:2.8rem; width:33.333%; padding-right:0.12rem; display:inline-block; overflow:hidden; vertical-align:top;}
@@ -61,7 +60,7 @@
 .essay .grid li a{font-size:0.23rem; color:#252525; line-height:1.34;}
 .essay .grid li .item{width:100%;}
 .grid li .item .imgr{width:100%; height:1.95rem; background-color:#f8f8f8; background-size:auto 100%; background-position:center center; background-repeat:no-repeat;}
-.grid li .item .txt{width:100%; height:0.616rem; overflow:hidden; padding:0.06rem 0 0;}
+.grid li .item .txt{width:100%; height:0.62rem; overflow:hidden; padding:0.06rem 0 0;}
 </style>
 
 <script>
@@ -91,7 +90,11 @@ export default {
 
     VUX.headerBtnEmpty();
     VUX.setHeader({
-      title: '首页'
+      title: '首页',
+      rightTpl: 'list',
+      rightFn: function(){
+        VUX.router.go({name: 'plugin'})
+      }
     })
 
     //轮播图展示
