@@ -89,7 +89,7 @@ export default {
     var els = view.$els;
 
     VUX.setHeader({
-      title: 'UI 组件',
+      title: 'UI 元件',
       leftTpl: 'back'
     })
 

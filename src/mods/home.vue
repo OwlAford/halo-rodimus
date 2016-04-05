@@ -203,6 +203,10 @@ export default {
         })
     });
 
+  },
+
+  beforeDestroy () {
+    VUX.headerBtnEmpty('right');
   }
   
 }

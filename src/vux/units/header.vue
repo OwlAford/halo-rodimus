@@ -9,10 +9,10 @@
 </template>
 <style>
 header{width:100%; height:0.8rem;}
-header .header{width:100%; height:0.8rem; background-color:#313638; color:#fff; position:fixed; left:0; top:0; z-index:999; line-height:0.8rem; z-index:9999;}
+header .header{width:100%; height:0.8rem; background-color:#313638; color:#fff; position:fixed; left:0; top:0; z-index:999; line-height:0.8rem; z-index:9999; transition:background-color .3s; -webkit-transition:background-color .3s;}
 header .title{text-align:center;}
 header .left,
-header .right{position:absolute; top:0; right:0.1rem; transition:opacity .3s; -webkit-transition:opacity .3s;}
+header .right{position:absolute; top:0; right:0.1rem; transition:opacity .6s; -webkit-transition:opacity .6s;}
 header .left:active,
 header .right:active{opacity:.8;}
 header .left{left:0.1rem; right:auto;}

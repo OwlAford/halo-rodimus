@@ -61,7 +61,6 @@ export default {
     var view = this;
     var els = view.$els;
 
-    VUX.headerBtnEmpty('right');
     VUX.setHeader({
       title: '组件',
       leftTpl: 'back'
