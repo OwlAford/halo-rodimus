@@ -12,16 +12,15 @@ header{width:100%; height:0.8rem;}
 header .header{width:100%; height:0.8rem; background-color:#313638; color:#fff; position:fixed; left:0; top:0; z-index:999; line-height:0.8rem; z-index:9999; transition:background-color .3s; -webkit-transition:background-color .3s;}
 header .title{text-align:center;}
 header .left,
-header .right{position:absolute; top:0; right:0.1rem; transition:opacity .6s; -webkit-transition:opacity .6s;}
+header .right{position:absolute; height:100%; top:0; right:0.1rem; transition:opacity .6s; -webkit-transition:opacity .6s;}
 header .left:active,
 header .right:active{opacity:.8;}
 header .left{left:0.1rem; right:auto;}
 header .left i{padding-left:0.46rem;}
-header .right i{padding-right:0.46rem;}
 header .left i:after{left:0;}
 header i:after{font-size:0.36rem; position:absolute; right:0; top:50%; margin-top:-0.18rem;}
 header .back:after{content:'\e602';}
-header .list:after{content:'\e60f';}
+header .list:after{content:'\e60f'; margin-top:0; line-height:0.8rem;}
 </style>
 <script>
 
@@ -49,7 +48,7 @@ export default {
     var templates = {
       back: '<i class="back">返回</i>',
       cancel: '<span>取消</span>',
-      list: '<i class="list"></i>'
+      list: '<i class="list"> </i>'
     }
     
     // 清除头部按钮
