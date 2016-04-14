@@ -166,3 +166,45 @@ v-bind:style 的对象语法十分直观——看着非常像 CSS，其实它是
     fontSize: '13px'
   }
 }</pre>
+
+
+###1.5 条件渲染
+
+**v-if**
+
+通过条件判断选择渲染html片段，如下例：
+
+<pre>&lt;h1 v-if=&quot;ok&quot;&gt;Yes&lt;/h1&gt;<br />&lt;h1 v-else&gt;No&lt;/h1&gt;</pre>
+
+**template v-if**
+
+因为 v-if 是一个指令，需要将它添加到一个元素上。但是如果我们想切换多个元素呢？此时我们可以把一个 <template> 元素当做包装元素，并在上面使用 v-if，最终的渲染结果不会包含它。
+
+<pre>&lt;template v-if=&quot;ok&quot;&gt;<br />  &lt;h1&gt;Title&lt;/h1&gt;<br />  &lt;p&gt;Paragraph 1&lt;/p&gt;<br />  &lt;p&gt;Paragraph 2&lt;/p&gt;<br />&lt;/template&gt;</pre>
+
+**v-show**
+
+另一个根据条件展示元素的选项是 v-show 指令。用法大体上一样，不同的是有 v-show 的元素会始终渲染并保持在 DOM 中。v-show 是简单的切换元素的 CSS 属性 display。
+
+>注意 v-show 不支持 < template > 语法。
+
+**v-else**
+
+v-else 元素必须立即跟在 v-if 或 v-show 元素的后面——否则它不能被识别。
+
+
+
+###1.6 方法处理器
+
+
+可以用 v-on 指令监听 DOM 事件：
+
+<pre>&lt;div id=&quot;example&quot;&gt;<br />  &lt;button v-on:click=&quot;greet&quot;&gt;Greet&lt;/button&gt;<br />&lt;/div&gt;</pre>
+
+我们绑定了一个单击事件处理器到一个方法 greet。下面在 Vue 实例中定义这个方法：
+
+<pre>var vm = new Vue({<br />  el: '#example',<br />  data: {<br />    name: 'Vue.js'<br />  },<br />  // 在 `methods` 对象中定义方法<br />  methods: {<br />    greet: function (event) {<br />      // 方法内 `this` 指向 vm<br />      alert('Hello ' + this.name + '!')<br />      // `event` 是原生 DOM 事件<br />      alert(event.target.tagName)<br />    }<br />  }<br />})<br /> <br />// 也可以在 JavaScript 代码中调用方法<br />vm.greet() // -&gt; 'Hello Vue.js!'</pre>
+
+###1.7 表单控件绑定
+
+参见UI元件演示模块 *(src/mods/ui.vue)*
