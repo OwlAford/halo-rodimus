@@ -16,7 +16,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     path: assets.root,
     publicPath: config.publicPath,
     filename: assetsPath(`${assets.jsDir}/[name].[${config.jsHashType}].js`),
-    chunkFilename: assetsPath(`${assets.jsDir}/[id].[${config.jsHashType}].js`)
+    chunkFilename: assetsPath(`${assets.jsDir}/[id].[name].[${config.jsHashType}].js`)
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -29,7 +29,8 @@ const webpackConfig = merge(baseWebpackConfig, {
       sourceMap: true
     }),
     new ExtractTextPlugin({
-      filename: assetsPath(`${assets.cssDir}/[name].[${config.cssHashType}].css`)
+      filename: assetsPath(`${assets.cssDir}/[name].[${config.cssHashType}].css`),
+      allChunks : true
     }),
     new OptimizeCSSPlugin(),
     new HtmlWebpackPlugin({
@@ -44,15 +45,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       chunksSortMode: 'dependency'
     }),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: (module, count) =>
-      module.resource 
-      && /\.js$/.test(module.resource) 
-      && module.resource.indexOf(path.join(__dirname, '../node_modules')) === 0
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
-      chunks: ['vendor']
+      names : ['vendor', 'manifest']
     }),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, '../public'),

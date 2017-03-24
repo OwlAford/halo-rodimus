@@ -8,7 +8,35 @@ const resolve = dir => path.join(__dirname, '..', dir)
 
 module.exports = {
   entry: {
-    app: './src/entry/index.js'
+    app: './src/entry/index.js',
+    vendor: [
+      'react',
+      'react-dom',
+      'react-redux',
+      'react-router',
+      'redux',
+      'redux-thunk',
+      'md5',
+      'nprogress',
+      'antd/lib/button',
+      'antd/lib/checkbox',
+      'antd/lib/col',
+      'antd/lib/date-picker',
+      'antd/lib/form',
+      'antd/lib/icon',
+      'antd/lib/input',
+      'antd/lib/message',
+      'antd/lib/modal',
+      'antd/lib/notification',
+      'antd/lib/radio',
+      'antd/lib/row',
+      'antd/lib/select',
+      'antd/lib/slider',
+      'antd/lib/spin',
+      'antd/lib/table',
+      'antd/lib/tree',
+      'antd/lib/tree-select'
+    ]
   },
   output: {
     filename: '[name].js'
@@ -38,7 +66,15 @@ module.exports = {
     }
   },
   module: {
-    rules: [{
+    rules: [/*{
+      test: /\.(js|jsx)$/,
+      loader: 'eslint-loader',
+      enforce: "pre",
+      include: [resolve('src'), resolve('test')],
+      options: {
+        formatter: require('eslint-friendly-formatter')
+      }
+    },*/ {
       test: /\.(js|jsx)$/,
       loader: 'babel-loader',
       include: [resolve('src'), resolve('test')]

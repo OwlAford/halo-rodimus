@@ -7,9 +7,14 @@ module.exports = {
   env: {
     browser: true,
   },
-  extends: 'standard',
-  plugins: [
-    'html'
+  "extends": [
+    "standard",
+    "standard-react"
+  ],
+  "plugins": [
+    "babel",
+    "react",
+    "promise"
   ],
   rules: {
     'arrow-parens': 0,

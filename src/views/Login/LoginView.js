@@ -43,6 +43,7 @@ export default class LoginView extends Component {
   }
 
   componentDidMount() {
+    NProgress.done()
     window.addEventListener('keyup', this.triggerSubmit, false)
   }
 

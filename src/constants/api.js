@@ -1,4 +1,5 @@
-const RMU = '/inmanage/'
+import { ROOT_PATH } from 'GLOBAL'
+const RMU = `/${ROOT_PATH}/`
 
 export default {
   // 登录
