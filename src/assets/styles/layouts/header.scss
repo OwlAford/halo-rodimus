@@ -1,0 +1,49 @@
+@function setBg($img) {
+  @return "../../images/" + $img
+}
+
+.app-header {
+  height: 60px;
+  
+  .logo {
+    height: 60px;
+    width: 240px;
+    float: left;
+    color: #333;
+    background: url(setBg('logo.png')) no-repeat 10px center / auto 30px;
+  }
+
+  .guide {
+    height: 60px;
+    float: left;
+    line-height: 60px;
+    font-size: 15px;
+    
+    a {
+      color: #424e67;
+      padding: 10px;
+      position: relative;
+      margin: 0 20px;
+
+      &:hover{
+        color: #3b8cff;
+      }
+
+      &.active {
+        color: #3b8cff;
+        &:after {
+          content: "";
+          display: block;
+          height: 2px;
+          background-color: #3b8cff;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          right: 0;
+        }
+      }
+    }
+  }
+}
+
+

@@ -1,0 +1,10 @@
+bin
+config
+dist
+node_modules
+public
+resources
+shell
+static
+src/libs/
+src/assets/

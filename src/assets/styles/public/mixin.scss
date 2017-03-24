@@ -1,0 +1,42 @@
+@mixin fullScreen {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin bgWhite {
+  background-color: #fff;
+}
+
+@mixin pozEdge {
+  left: 0;
+  top: 0;
+}
+
+@mixin pozEdgeRight {
+  top: 0;
+  right: 0;
+}
+
+@mixin inputFocus {
+	box-shadow: 0 0 7px rgba(0, 0, 0, .08) inset;
+}
+
+// 全屏绝对定位
+@mixin fixedEdge {
+  @include pozEdge;
+  @include fullScreen;
+  position: fixed;
+}
+
+// 全屏垂直水平居中
+@mixin centerMiddle($width, $height) {
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  width: $width;
+  height: $height;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-top: $height*-0.5;
+  margin-left: $width*-0.5;
+}

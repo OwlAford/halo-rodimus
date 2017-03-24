@@ -1,0 +1,22 @@
+{
+  "presets": [
+    ["es2015", { "modules": false }],
+    "react",
+    "stage-2"
+  ],
+  "plugins": [
+    "transform-runtime",
+    "transform-decorators-legacy",
+    ["import", {
+      "libraryName": "antd",
+      "libraryDirectory": "lib", 
+      "style": true
+    }]
+  ],
+  "comments": false,
+  "env": {
+    "test": {
+      "plugins": [ "istanbul" ]
+    }
+  }
+}

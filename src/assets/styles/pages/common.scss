@@ -1,0 +1,50 @@
+.app-search-panel {
+  padding: 20px 30px;
+  margin: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+
+  .button-group,
+  .button-group-middle {
+    text-align: right;
+    .ant-btn {
+      margin-left: 15px;
+    }
+  }
+
+  .button-group-middle {
+    text-align: center;
+  }
+}
+
+.app-left-side {
+  padding: 20px 15px 0 20px;
+}
+
+.app-form-scan {
+  padding-top: 10px;
+}
+
+.app-spin {
+  position: fixed;
+  height: 32px;
+  width: 32px;
+  left: 50%;
+  top: 40%;
+  margin: -16px 0 0 -16px;
+}
+
+.app-narrow-table {
+  line-height: 1;
+
+  .ant-table-tbody >tr >td {
+    padding: 14px;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    visibility: hidden;
+    clear: both;
+  }
+}

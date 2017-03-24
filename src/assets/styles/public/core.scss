@@ -1,0 +1,229 @@
+@import "./mixin.scss";
+@import "./function.scss";
+@import "./variable.scss";
+@import "./animate.scss";
+
+@mixin contentRadius {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+@mixin inputPlaceholder {
+  color: #ccc;
+}
+
+@function setFont($ext) {
+  @return "../../images/fonts/iconfont." + $ext
+}
+
+body {
+  background-color: #eff4f8;
+  transition: background-color .6s;
+}
+
+.root, 
+.app-wrap, 
+.app-container {
+  @include fullScreen;
+  font-size: 14px;
+}
+
+.app-wrap {
+  animation: fadeIn .6s;
+
+  input {
+    &:-ms-input-placeholder {
+      @include inputPlaceholder;
+    }
+
+    &::-webkit-input-placeholder {
+      @include inputPlaceholder;
+    }
+  }
+}
+
+.app-content {
+  position: absolute;
+  left: 200px;
+  right: 10px;
+  bottom: 0;
+  top: 60px;
+  background-color: #fff;
+  @include contentRadius;
+  
+  .app-page-wrapper {
+    background-color: #fff;
+    border: 1px solid #E2E8EC;
+    border-bottom: none;
+    @include contentRadius;
+    position: relative;
+    min-height: 100%;
+  }
+}
+
+@font-face {
+  font-family: 'iconfont';
+  src: url(setFont('eot'));
+  src: url(setFont('eot?#iefix')) format('embedded-opentype'),
+  url(setFont('woff')) format('woff'),
+  url(setFont('ttf')) format('truetype'),
+  url(setFont('svg#iconfont')) format('svg');
+}
+
+// @font-face {
+//   font-family: 'iconfont';
+//   src: url('http://at.alicdn.com/t/font_ta1c7ewgc5e45cdi.eot');
+//   src: url('http://at.alicdn.com/t/font_ta1c7ewgc5e45cdi.eot?#iefix') format('embedded-opentype'),
+//   url('http://at.alicdn.com/t/font_ta1c7ewgc5e45cdi.woff') format('woff'),
+//   url('http://at.alicdn.com/t/font_ta1c7ewgc5e45cdi.ttf') format('truetype'),
+//   url('http://at.alicdn.com/t/font_ta1c7ewgc5e45cdi.svg#iconfont') format('svg');
+// }
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-modal-box-mask {
+  @include fixedEdge;
+  background-color: $maskOpacity;
+  z-index: 999;
+  animation: fadeIn .2s;
+  
+  .app-modal-box {
+    @include centerMiddle(520px, 360px)
+    @include bgWhite;
+    margin-top: -210px;
+    border-radius: 8px;
+    animation: zoomIn .3s .2s both;
+    box-shadow: 0 12px 24px -6px rgba(0,0,0,.34);
+    
+    .close {
+      width: 52px;
+      height: 52px;
+      position: absolute;
+      @include pozEdgeRight;
+      display: block;
+      background: url(setBg('close.svg')) no-repeat center center / 20px auto;
+      z-index: 9;
+      cursor: pointer;
+    }
+    
+    .title {
+      width: 100%;
+      height: 52px;
+      line-height: 52px;
+      font-size: 18px;
+      text-align: center;
+      border-bottom: $borderDefault;
+      font-weight: 700;
+      background-color: #f9f9f9;
+      border-top-right-radius: 8px;
+      border-top-left-radius: 8px;
+    }
+
+    .content {
+      padding: 25px 0 0;
+      min-height: 210px;
+    }
+
+  }
+}
+
+.app-input {
+  input {
+    padding: 8px 20px;
+    border: $borderGray;
+    width: 246px;
+    outline: none;
+    background-color: #fcfcfc;
+    margin-bottom: 20px;
+    border-radius: 4px;
+
+    &:focus {
+      @include inputFocus;
+    }    
+  }
+}
+
+
+.app-form-item {
+  display: block;
+  
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  .label {
+    display: block;
+    float: left;
+    flex: 0 0 auto;
+    width: 33.3333%;
+    padding: 8px 5px 8px 0;
+    text-align: right;
+
+    &.req:before {
+      content: "*";
+      color: red;
+    }
+  }
+
+  .app-input {
+    float: left;
+    flex: 0 0 auto;
+    width: 66.66666%;
+  }
+
+}
+
+.app-btn {
+  display: inline-block;
+  padding: 10px 40px;
+  background-color: $blue;
+  color: #fff;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color .3s, color .3s;
+  
+  &.warn {
+    background-color: $lightRed;
+    &:hover {
+      background-color: $deepRed;
+    }
+  }
+
+  &.hollow {
+    padding: 8px 40px;
+    box-sizing: border-box;
+    border: 1px solid $blue;
+    color: $blue;
+    background-color: transparent;
+
+    &:hover {
+      background-color: $blue;
+      color: #fff;
+    }
+  }
+
+  &:hover {
+    background-color: $deepBlue;
+  }
+}
+
+.app-double-btn {
+  text-align: center;
+  padding: 20px 0;
+
+  .app-btn {
+    margin: 0 20px;
+  }
+}
+

@@ -1,0 +1,35 @@
+.page-welcome {
+  .title {
+    font-size: 22px;
+    text-align: center;
+    line-height: 90px;
+    font-weight: 700;
+  }        
+  .table {
+    padding: 0 80px;
+
+    table {
+      width: 100%;
+      border: 0;
+      margin: 0;
+      border-collapse: collapse;
+      border-spacing: 0;
+      
+      tr {
+        &:hover {
+          td {
+            background-color: #F6FAFF;
+          }
+        }
+        td {
+          padding: 12px;
+          border: 1px solid #f2f6fd;  
+          &.label {
+            text-align: right;
+          }
+        }  
+      }
+
+    }
+  }
+}

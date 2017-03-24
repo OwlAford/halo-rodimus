@@ -1,0 +1,120 @@
+@mixin round {
+  border-radius: 50%;
+}
+
+@mixin fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.app-account {
+  height: 60px;
+  line-height: 60px;
+  float: right;
+  padding-right: 20px;
+  position: relative;
+  
+  .cancel {
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 15px;
+    background-color: #F8645C;
+    cursor: pointer;
+    margin-left: 20px;
+    border-radius: 14px;
+    &:hover {
+      background-color: #e35a53;
+    }
+  }
+
+  .avatar-s {
+    height: 30px;
+    width: 30px;
+    @include round;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    cursor: pointer;
+
+    img {
+      @include round;
+      @include fill;
+    }
+  }
+
+  .card {
+    width: 220px;
+    background-color: #fff;
+    border-radius: 5px;
+    position: absolute;
+    left: -95px;
+    top: 60px;
+    z-index: 99;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, .16);
+    display: none;
+    
+    .avatar-m {
+      display: inline-block;
+      vertical-align: middle;
+      height: 50px;
+      width: 50px;
+      @include round;
+      padding: 3px;
+      background-color: rgba(0,0,0,.12);
+      margin-right: 10px;
+
+      img {
+        @include round;
+        @include fill;
+      }
+    }
+    
+    &.show {
+      display: block;
+    }
+    
+    .up {
+      height: 80px;
+      padding: 15px;
+      background-color: #438aee;
+      position: relative;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      line-height: 50px;
+      color: #fff;
+      &:after {
+        content:"";
+        display: block;
+        height: 0;
+        width: 0;
+        position: absolute;
+        left: 50%;
+        margin-left: -10px;
+        top: -18px;
+        border-style: solid;
+        border-color: transparent transparent #438aee;
+        border-width: 10px 10px;
+        position: absolute;
+      }
+    }
+
+    .down {
+      line-height: 40px;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      overflow: hidden;
+      
+      .item {
+        padding: 0 20px;
+        height: 40px;
+        cursor: pointer;
+        &:hover {
+          background-color: #f0f8fd;
+        }
+      }
+    }
+  }
+}
+
