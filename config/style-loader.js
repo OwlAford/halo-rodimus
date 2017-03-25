@@ -11,7 +11,7 @@ const styleLoader = (loader, options) => {
       minimize: isProduction,
       sourceMap: !isProduction
     }
-  }]
+  }, 'postcss-loader']
 
   if (loader) {
     loaders.push({

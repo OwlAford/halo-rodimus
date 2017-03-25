@@ -1,6 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
-const autoprefixer = require('autoprefixer')
+const cssnano = require('cssnano')
 const styleLoader = require('./style-loader')
 const assetsPath = require('./assetsPath')
 
@@ -94,14 +94,14 @@ module.exports = {
       test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
       loader: 'url-loader',
       query: {
-        limit: 10000,
+        limit: 8192,
         name: assetsPath('images/[name].[hash:7].[ext]')
       }
     }, {
       test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
       loader: 'url-loader',
       query: {
-        limit: 10000,
+        limit: 8192,
         name: assetsPath('fonts/[name].[hash:7].[ext]')
       }
     }]
@@ -110,11 +110,23 @@ module.exports = {
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: [
-          autoprefixer({
-            browsers: ['last 2 versions']
+          cssnano({
+            autoprefixer: {
+              add: true,
+              remove: true,
+              browsers: ['last 2 versions']
+            },
+            discardComments: {
+              removeAll: true
+            },
+            discardUnused: false,
+            mergeIdents: false,
+            reduceIdents: false,
+            safe: true,
+            sourcemap: true
           })
         ]
       }
     })
-  ]  
+  ]
 }
