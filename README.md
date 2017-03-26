@@ -1,1 +1,1 @@
-# halo
+# React Web App Boilerplate
