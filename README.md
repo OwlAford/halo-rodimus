@@ -1,1 +1,1 @@
-# React Web App Boilerplate
+# React Web App
