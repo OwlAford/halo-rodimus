@@ -1,7 +1,7 @@
 {
-  "name": "halo",
-  "version": "0.0.1",
-  "description": "A Project",
+  "name": "react-halo",
+  "version": "1.0.1",
+  "description": "A React Project",
   "author": "OwlAford <zhangyh@belink.com>",
   "license": "MIT",
   "private": true,
@@ -11,7 +11,7 @@
     "lint": "eslint --ext .js,.jsx src"
   },
   "dependencies": {
-    "antd": "^2.8.2",
+    "antd": "^2.9.0",
     "es5-shim": "^4.5.9",
     "es6-promise": "^4.1.0",
     "es6-shim": "^0.35.3",
