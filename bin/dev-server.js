@@ -36,7 +36,7 @@ compiler.plugin('compilation', compilation => {
 })
 
 app.use('/inmanage', (req, res) => {
-  const url = `http://139.224.128.69:9080/inmanage${req.url}`
+  const url = `https://flame.zaixy.cn/inmanage${req.url}`
   console.log(chalk.yellow(`[PROXY]: ${url}`))
   req.pipe(request(url)).pipe(res)
 })
