@@ -2,8 +2,13 @@ const fs = require('fs')
 const path = require('path')
 const chalk = require('chalk')
 const moment = require('moment')
+const mkdirp = require('mkdirp')
 
 const rootPath = path.resolve()
+const outputPath = 'snapshots'
+
+// create folder
+mkdirp(outputPath, err => err ? console.log(chalk.red(err)) : console.log(chalk.green(`${outputPath} created successfully!`)))
 
 exports.writeJSON = (path, obj) => {
   fs.writeFileSync(path, JSON.stringify(obj, null, 2))
@@ -49,31 +54,17 @@ const getInfo = str => {
 exports.readDir(rootPath, 'dist', (curPath, filename, stat) => {
   const info = getInfo(filename)
 
-  if (info.suffix === 'js') {
-    resourceMap.js[info.name] = {
+  if (info.suffix === 'js' || info.suffix === 'css') {
+    resourceMap[info.suffix][`${info.name}.${info.suffix}`] = {
       hash: info.hash,
       path: curPath,
       size: stat.size,
       birthTime: stat.birthtime
     }
-  } else if (info.suffix === 'css') {
-    resourceMap.css[info.name] = {
-      hash: info.hash,
-      path: curPath,
-      size: stat.size,
-      birthTime: stat.birthtime
-    }
-  } else if (!info.hash) {
-    resourceMap.static[info.name] = {
-      suffix: info.suffix,
-      path: curPath,
-      size: stat.size,
-      birthTime: stat.birthtime
-    } 
   } else {
-    resourceMap.assets[info.name] = {
-      suffix: info.suffix,
-      hash: info.hash,
+    const dir = info.hash ? 'assets' : 'static'
+    resourceMap[dir][`${info.name}.${info.suffix}`] = {
+      hash: info.hash ? info.hash : '',
       path: curPath,
       size: stat.size,
       birthTime: stat.birthtime
@@ -81,5 +72,5 @@ exports.readDir(rootPath, 'dist', (curPath, filename, stat) => {
   }
 })
 
-exports.writeJSON(`./log/${moment().format('MMDDhhmmss')}.json`, resourceMap)
+exports.writeJSON(`./${outputPath}/${moment().format('YYYYMMDDhhmmss')}.json`, resourceMap)
 console.log(chalk.green('Resource mapping file has been generated!'))
