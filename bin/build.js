@@ -29,5 +29,6 @@ rm(path.join(assets.root, assets.subDir), err => {
     }) + '\n\n')
 
     console.log(chalk.cyan('Build complete.\n'))
+    require('./dist-map')
   })
 })

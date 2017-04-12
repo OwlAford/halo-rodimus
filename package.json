@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "node bin/dev-server.js",
     "build": "node bin/build.js",
-    "map": "node bin/files-map.js",
+    "map": "node bin/dist-map.js",
     "lint": "eslint --ext .js,.jsx src"
   },
   "dependencies": {
