@@ -1,3 +1,4 @@
+const tools = require('./analyzing-tools')
 require('./check-versions')()
 process.env.NODE_ENV = 'production'
 
@@ -27,5 +28,6 @@ rm(path.join(assets.root, assets.subDir), err => {
       chunkModules: false
     }) + '\n\n')
     console.log(chalk.cyan('Build complete.\n'))
+    tools.getSnapshots('dist', 'data/snapshots')
   })
 })

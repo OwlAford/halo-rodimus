@@ -8,7 +8,9 @@
   "scripts": {
     "dev": "node bin/dev-server.js",
     "build": "node bin/build.js",
-    "shot": "node bin/dist-snapshots.js",
+    "shot": "node bin/snapshots.js",
+    "comp": "node bin/compare.js",
+    "build-inc": "node bin/build-inc.js",
     "lint": "eslint --ext .js,.jsx src"
   },
   "dependencies": {

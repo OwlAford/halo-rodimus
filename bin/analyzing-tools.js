@@ -17,6 +17,22 @@ exports.isEmptyObject = obj => {
   return true
 }
 
+exports.deleteFolder = dir => {  
+  let files = []
+  if (fs.existsSync(dir)) {  
+    files = fs.readdirSync(dir)
+    files.forEach((file, index) => {  
+      var curPath = path.join(dir, file) 
+      if (fs.statSync(curPath).isDirectory()) {
+        exports.deleteFolder(curPath)
+      } else { 
+        fs.unlinkSync(curPath)  
+      }  
+    })
+    fs.rmdirSync(dir) 
+  }  
+}
+
 exports.writeJSON = (path, obj) => {
   fs.writeFileSync(path, JSON.stringify(obj, null, 2))
 }
@@ -179,7 +195,7 @@ exports.compare = opts => {
   }
   exports.deleteEmptyProperty(report)
   createDir(opts.logPath)
-  exports.writeJSON(`./${opts.logPath}/compare-${moment().format('YYYYMMDDHHmmss')}.json`, report)
+  exports.writeJSON(`./${opts.logPath}/${moment().format('YYYYMMDDHHmmss')}.json`, report)
 }
 
 exports.copyFile = (filePath, tarDir) => {
@@ -190,6 +206,7 @@ exports.copyFile = (filePath, tarDir) => {
 }
 
 exports.buildIncPackage = (map, outPath) => {
+  exports.deleteFolder(getFullPath(outPath))
   createDir(outPath, true)
   const data = exports.readJSON(getFullPath(map))
   const bundleList = merge(data.addList, data.modifiedList)
