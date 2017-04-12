@@ -1,5 +1,4 @@
 require('./check-versions')()
-
 process.env.NODE_ENV = 'production'
 
 const ora = require('ora')
@@ -27,8 +26,6 @@ rm(path.join(assets.root, assets.subDir), err => {
       chunks: false,
       chunkModules: false
     }) + '\n\n')
-
     console.log(chalk.cyan('Build complete.\n'))
-    require('./dist-map')
   })
 })
