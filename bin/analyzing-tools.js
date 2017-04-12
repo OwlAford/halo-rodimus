@@ -3,9 +3,19 @@ const path = require('path')
 const chalk = require('chalk')
 const moment = require('moment')
 const mkdirp = require('mkdirp')
+const merge = require('webpack-merge')
 
 const rootPath = path.resolve()
 const getFullPath = relPath => path.join(rootPath, relPath)
+const createDir = (path, islog) => mkdirp(path, err => err ? console.log(chalk.red(err)) : !islog && console.log(chalk.green(`${path} created successfully!`)))
+
+exports.isEmptyObject = obj => {
+  let name
+  for ( name in obj ) {
+    return false
+  }
+  return true
+}
 
 exports.writeJSON = (path, obj) => {
   fs.writeFileSync(path, JSON.stringify(obj, null, 2))
@@ -84,45 +94,120 @@ exports.getSnapshots = (readPath, outputPath) => {
       }
     }
   })
-  mkdirp(outputPath, err => err ? console.log(chalk.red(err)) : console.log(chalk.green(`${outputPath} created successfully!`)))
+  createDir(outputPath)
+  exports.deleteEmptyProperty(resourceMap)
   exports.writeJSON(`./${outputPath}/${moment().format('YYYYMMDDHHmmss')}.json`, resourceMap)
   console.log(chalk.green('Resource mapping file has been generated!'))
+}
+
+exports.deleteEmptyProperty = object => {
+  for (var key in object) {
+    var value = object[key]
+    if (typeof value === 'object') {
+      if (Array.isArray(value)) {
+        if (value.length == 0) {
+          delete object[key]
+        }
+      } else {
+        if (exports.isEmptyObject(value)) {
+          delete object[key]
+        } else {
+          exports.deleteEmptyProperty(value)
+        }
+      }
+    } else if ((value === '' || value === null || value === undefined)) {
+      delete object[key]
+    }
+  }
 }
 
 /**
   * @param [json] source
   * @param [json] target
   * @param [Array] compArr
+  * @param [String] logPath
   *
   */
+exports.compare = opts => {
+  const sourceData = exports.readJSON(getFullPath(opts.source))
+  const targetData = exports.readJSON(getFullPath(opts.target))
 
-// exports.compare = options => {
+  // Get the list of new files
+  let addList = {}
+  let removeList = {}
+  let modifiedList = {}
+  opts.compArr.forEach(e => {
+    addList[e] = {}
+    modifiedList[e] = {}
+    const tar = targetData[e]
+    const old = sourceData[e]
+    for (key in tar) {
+      if (old[key]) {
+        const tarItem = tar[key]
+        const oldItem = old[key]
+        if (tarItem.hash !== oldItem.hash || tarItem.size !== oldItem.size) {
+          const oldSize = (oldItem.size / 1024).toFixed(3)
+          const tarSize = (tarItem.size / 1024).toFixed(3)
+          const numChange =((oldItem.size - tarItem.size) / 1024).toFixed(3)
+          modifiedList[e][key] = {
+            hashChange: oldItem.hash == tarItem.hash ? `${oldItem.hash}(no change)` : `${oldItem.hash} -> ${tarItem.hash}`,
+            sizeChange: `${oldSize}KB -> ${tarSize}KB (${numChange >= 0 ? '+' + numChange : numChange}KB)`,
+            newfilePath: tarItem.path
+          }
+        }
+      } else {
+        addList[e][key] = tar[key]
+      }
+    }
+  })
 
-// }
+  opts.compArr.forEach(e => {
+    removeList[e] = {}
+    const tar = targetData[e]
+    const old = sourceData[e]
+    for (key in old) {
+      if (!tar[key]) {
+        removeList[e][key] = old[key]
+      }
+    }
+  })
 
-const opts = {
-  source: 'snapshots/20170412140457.json',
-  target: 'snapshots/20170412140495.json',
-  compArr: ['css', 'js', 'assets', 'static']
+  let report = {
+    addList,
+    modifiedList,
+    removeList
+  }
+  exports.deleteEmptyProperty(report)
+  createDir(opts.logPath)
+  exports.writeJSON(`./${opts.logPath}/compare-${moment().format('YYYYMMDDHHmmss')}.json`, report)
 }
 
-const sourceData = exports.readJSON(getFullPath(opts.source))
-const targetData = exports.readJSON(getFullPath(opts.target))
+exports.copyFile = (filePath, tarDir) => {
+  const files = fs.readFileSync(filePath)
+  const spl = filePath.split('\\')
+  const filename = spl[spl.length - 1]
+  fs.writeFileSync(path.join(tarDir, filename), files)
+}
 
-// format
-let report = {
-  js: {
-    'vendor.js': {
-      hashChange: 'af33sdf -> af33Sdf',
-      sizeChange: '23KB -> 22KB (-1KB)',
-      filePath: 'D:\\react-halo\\dist\\js'
-    }
-  },
-  css: {
-    'app.css': {
-      hashChange: 'af33sdf -> af33Sdf',
-      sizeChange: '23KB -> 24KB (+1KB)',
-      filePath: 'D:\\react-halo\\dist\\css'
+exports.buildIncPackage = (map, outPath) => {
+  createDir(outPath, true)
+  const data = exports.readJSON(getFullPath(map))
+  const bundleList = merge(data.addList, data.modifiedList)
+  const incPath = getFullPath(outPath)
+  if (!exports.isEmptyObject(bundleList)) {
+    for (key in bundleList) {
+      const curList = bundleList[key]
+      for (itm in curList) {
+        const item = curList[itm]
+        const subDir = key === 'static' ? '' : key
+        subDir && createDir(`${outPath}/${subDir}`, true)
+        const filePath = item.path || item.newfilePath
+        const curPath = path.join(incPath, subDir)
+        exports.copyFile(filePath, curPath)
+      }
     }
   }
+  console.log(chalk.green('Files copy successfully!'))
 }
+
+
