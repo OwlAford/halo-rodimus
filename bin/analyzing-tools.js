@@ -162,12 +162,24 @@ exports.compare = opts => {
         const tarItem = tar[key]
         const oldItem = old[key]
         if (tarItem.hash !== oldItem.hash || tarItem.size !== oldItem.size) {
+          const oldHash = oldItem.hash
+          const tarHash = tarItem.hash
+          const hashChange = {
+            oldHash,
+            tarHash,
+            change: oldHash == tarHash ? false : true
+          }
           const oldSize = (oldItem.size / 1024).toFixed(3)
           const tarSize = (tarItem.size / 1024).toFixed(3)
           const numChange =((oldItem.size - tarItem.size) / 1024).toFixed(3)
+          const sizeChange = {
+            oldSize,
+            tarSize,
+            change: numChange > 0 ? `+${numChange}` : numChange
+          }
           modifiedList[e][key] = {
-            hashChange: oldItem.hash == tarItem.hash ? `${oldItem.hash}(no change)` : `${oldItem.hash} -> ${tarItem.hash}`,
-            sizeChange: `${oldSize}KB -> ${tarSize}KB (${numChange >= 0 ? '+' + numChange : numChange}KB)`,
+            hashChange,
+            sizeChange,
             newfilePath: tarItem.path
           }
         }
