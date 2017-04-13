@@ -179,7 +179,7 @@ export default class ApplyHistoryListView extends Component {
           <Button onClick={e => this.initTable()}>重置</Button>
           <RangePicker
             style={{float: 'right'}}
-            // ranges={{ 
+            // ranges = {{ 
             //   '今日': [moment(), moment()], 
             //   '本月': [moment(), moment().endOf('month')] 
             // }}

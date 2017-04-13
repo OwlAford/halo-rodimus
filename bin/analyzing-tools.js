@@ -9,9 +9,11 @@ const rootPath = path.resolve()
 const getFullPath = relPath => path.join(rootPath, relPath)
 const createDir = (path, islog) => mkdirp(path, err => err ? console.log(chalk.red(err)) : !islog && console.log(chalk.green(`${path} created successfully!`)))
 
+createDir('data', true)
+
 exports.isEmptyObject = obj => {
   let name
-  for ( name in obj ) {
+  for (name in obj) {
     return false
   }
   return true
@@ -85,33 +87,32 @@ exports.getSnapshots = (readPath, outputPath) => {
         hash: hash,
         path: fullPath,
         size: stat.size,
-        birthTime: stat.birthtime
+        mtime: stat.mtime
       }
     } else if (filename.match(/\.(woff2?|eot|ttf|otf)(\?.*)?$/)) {
       resourceMap.fonts[`${info.name}.${suffix}`] = {
         hash: hash,
         path: fullPath,
         size: stat.size,
-        birthTime: stat.birthtime
+        mtime: stat.mtime
       }
     } else if (filename.match(/\.(png|jpe?g|gif|svg)(\?.*)?$/)) {
       resourceMap.images[`${info.name}.${suffix}`] = {
         hash: hash,
         path: fullPath,
         size: stat.size,
-        birthTime: stat.birthtime
+        mtime: stat.mtime
       }
     } else if (filename.match(/\.(html?|ico)$/)) {
       resourceMap.static[`${info.name}.${suffix}`] = {
         hash: hash,
         path: fullPath,
         size: stat.size,
-        birthTime: stat.birthtime
+        mtime: stat.mtime
       }
     }
   })
-  createDir(outputPath)
-  exports.deleteEmptyProperty(resourceMap)
+  createDir(outputPath, true)
   exports.writeJSON(`./${outputPath}/${moment().format('YYYYMMDDHHmmss')}.json`, resourceMap)
   console.log(chalk.green('Resource mapping file has been generated!'))
 }
@@ -142,6 +143,7 @@ exports.deleteEmptyProperty = object => {
   * @param [json] target
   * @param [Array] compArr
   * @param [String] logPath
+  * @param [Function] callback
   *
   */
 exports.compare = opts => {
@@ -161,21 +163,32 @@ exports.compare = opts => {
       if (old[key]) {
         const tarItem = tar[key]
         const oldItem = old[key]
-        if (tarItem.hash !== oldItem.hash || tarItem.size !== oldItem.size) {
+        let baseChange = false
+        let staticChange = false
+        if (tarItem.hash) {
+          baseChange = tarItem.hash !== oldItem.hash || tarItem.size !== oldItem.size
+        } else {
+          staticChange = tarItem.mtime !== oldItem.mtime || tarItem.size !== oldItem.size
+        }
+
+        if (baseChange || staticChange) {
           const oldHash = oldItem.hash
           const tarHash = tarItem.hash
-          const hashChange = {
-            oldHash,
-            tarHash,
-            change: oldHash == tarHash ? false : true
+          let hashChange = {}
+          if (oldHash && tarHash) {
+            hashChange = {
+              oldHash,
+              tarHash,
+              change: oldHash === tarHash ? false : true
+            }
           }
           const oldSize = (oldItem.size / 1024).toFixed(3)
           const tarSize = (tarItem.size / 1024).toFixed(3)
-          const numChange =((oldItem.size - tarItem.size) / 1024).toFixed(3)
+          const sizeDiff =((oldItem.size - tarItem.size) / 1024).toFixed(3)
           const sizeChange = {
             oldSize,
             tarSize,
-            change: numChange > 0 ? `+${numChange}` : numChange
+            change: sizeDiff > 0 ? `+${sizeDiff}` : sizeDiff
           }
           modifiedList[e][key] = {
             hashChange,
@@ -206,8 +219,10 @@ exports.compare = opts => {
     removeList
   }
   exports.deleteEmptyProperty(report)
-  createDir(opts.logPath)
-  exports.writeJSON(`./${opts.logPath}/${moment().format('YYYYMMDDHHmmss')}.json`, report)
+  createDir(opts.logPath, true)
+  exports.writeJSON(`./${opts.logPath}/compare.json`, report)
+  console.log(chalk.green('Snapshots comparison successfully!'))
+  opts.callback && opts.callback(report)
 }
 
 exports.copyFile = (filePath, tarDir) => {
@@ -220,7 +235,7 @@ exports.copyFile = (filePath, tarDir) => {
 exports.buildIncPackage = (map, outPath) => {
   exports.deleteFolder(getFullPath(outPath))
   createDir(outPath, true)
-  const data = exports.readJSON(getFullPath(map))
+  const data = typeof map === 'string' ? exports.readJSON(getFullPath(map)) : map
   const bundleList = merge(data.addList, data.modifiedList)
   const incPath = getFullPath(outPath)
   if (!exports.isEmptyObject(bundleList)) {
@@ -235,8 +250,10 @@ exports.buildIncPackage = (map, outPath) => {
         exports.copyFile(filePath, curPath)
       }
     }
+    console.log(chalk.green('Files copy successfully!'))
+  } else {
+    console.log(chalk.yellow('No files available for replication!'))
   }
-  console.log(chalk.green('Files copy successfully!'))
 }
 
 

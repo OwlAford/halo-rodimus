@@ -38,7 +38,7 @@ export default class StrategySettingsView extends Component {
   delStrategy(info) {
     confirm({
       title: '删除策略',
-      content: '是否确认删除策略？',
+      content: '确认删除策略？',
       onOk: () => {
         this.props.deleteStrategy(info)
       }

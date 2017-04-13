@@ -10,7 +10,7 @@
     "build": "node bin/build.js",
     "shot": "node bin/snapshots.js",
     "comp": "node bin/compare.js",
-    "build-inc": "node bin/build-inc.js",
+    "dist-inc": "node bin/dist-inc.js",
     "lint": "eslint --ext .js,.jsx src"
   },
   "dependencies": {
