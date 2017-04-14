@@ -45,6 +45,6 @@ export default store => ({
         require('./checkHistoryList').default(store),
         require('./applyHistoryList').default(store)
       ])
-    })
+    }, 'main')
   }
 })
