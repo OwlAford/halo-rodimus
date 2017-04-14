@@ -1,6 +1,8 @@
 bin
 config
+data
 dist
+dist_inc
 node_modules
 public
 resources

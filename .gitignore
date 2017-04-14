@@ -2,6 +2,6 @@
 .DS_Store
 node_modules/
 dist/
-dist-inc/
+dist_inc/
 data/
 *.log

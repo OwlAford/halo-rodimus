@@ -15,8 +15,9 @@ if (shotArr.length > 1) {
     target: `${relPath}/${shotArr[0]}.json`,
     compArr: ['css', 'js', 'images', 'fonts', 'static'],
     logPath: 'data',
-    callback: data => tools.buildIncPackage(data, 'dist-inc')
+    callback: data => tools.buildIncPackage(data, 'dist_inc')
   })
+  require('./server-report')
 } else {
   console.log(chalk.red('Can not be compared!'))
 }

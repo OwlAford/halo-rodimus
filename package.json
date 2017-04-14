@@ -10,7 +10,8 @@
     "build": "node bin/build.js",
     "shot": "node bin/snapshots.js",
     "comp": "node bin/compare.js",
-    "dist-inc": "node bin/dist-inc.js",
+    "repo": "node bin/server-report.js",
+    "incr": "node bin/dist-increment.js",
     "lint": "eslint --ext .js,.jsx src"
   },
   "dependencies": {
@@ -74,6 +75,7 @@
     "optimize-css-assets-webpack-plugin": "^1.3.0",
     "ora": "^1.1.0",
     "postcss-loader": "^1.3.3",
+    "pug": "^2.0.0-beta11",
     "request": "^2.81.0",
     "rimraf": "^2.6.0",
     "sass-loader": "^6.0.3",

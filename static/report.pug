@@ -1,0 +1,71 @@
+mixin groupList(title, datList)
+  .group
+    .groupTitle #{title}
+    if datList
+      .typeList
+        - for (key in datList)
+          - var typeList = datList[key]
+          .typeItem
+            .typeTitle #{key}
+            - for (file in typeList)
+              - var fileInfo = typeList[file]
+              .item
+                .fileName #{file}
+                .infoList
+                  - for (ifo in fileInfo)
+                    - var hash = ifo == 'hash'
+                    - var path = ifo == 'path'
+                    - var size = ifo == 'size'
+                    - var mtime = ifo == 'mtime'
+                    - var hashChange = ifo == 'hashChange'
+                    - var sizeChange = ifo == 'sizeChange'
+                    - var newfilePath = ifo == 'newfilePath'
+                    .row
+                      if hash
+                        .cell.t hash值
+                      if hashChange
+                        .cell.t hash变化
+                      else if size
+                        .cell.t 文件大小
+                      else if sizeChange
+                        .cell.t 文件大小变化 
+                      else if path
+                        .cell.t 文件路径
+                      else if mtime
+                        .cell.t 修改时间
+                      else if newfilePath
+                        .cell.t 新文件路径
+                      if hashChange
+                        - var hc = fileInfo[ifo]
+                        .cell
+                          span.green #{hc.oldHash} 
+                          span => 
+                          if hc.change
+                            span.red #{hc.tarHash}
+                            span.state.red
+                          else
+                            span.green #{hc.tarHash}
+                      else if sizeChange
+                        - var sc = fileInfo[ifo]
+                        - var scChange = sc.change * 1 !== 0
+                        .cell
+                          if scChange
+                            span.green #{sc.oldSize}KB
+                            span  => 
+                            span.red #{sc.tarSize}KB
+                            span.state.red (#{sc.change}KB)
+                          else
+                            span.green #{sc.tarSize}KB
+                            span.state.green (未变化)
+                      else if size
+                        .cell #{fileInfo[ifo]}B
+                      else 
+                        .cell #{fileInfo[ifo]}
+
+    else
+      .nothing 没有文件被修改
+
+.amd
+  +groupList('新增文件列表', addList)
+  +groupList('修改文件列表', modifiedList)
+  +groupList('移除文件列表', removeList)

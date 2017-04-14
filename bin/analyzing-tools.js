@@ -39,7 +39,7 @@ exports.writeJSON = (path, obj) => {
   fs.writeFileSync(path, JSON.stringify(obj, null, 2))
 }
 
-exports.readJSON = (path) => {
+exports.readJSON = path => {
   return JSON.parse(fs.readFileSync(path))
 }
 
@@ -160,7 +160,7 @@ exports.compare = opts => {
     const tar = targetData[e]
     const old = sourceData[e]
     for (key in tar) {
-      if (old[key]) {
+      if (key in old) {
         const tarItem = tar[key]
         const oldItem = old[key]
         let baseChange = false
