@@ -1,4 +1,5 @@
 require('./check-versions')()
+const ip = require('ip')
 const opn = require('opn')
 const path = require('path')
 const chalk = require('chalk')
@@ -50,7 +51,7 @@ app.use(hotMiddleware)
 const staticPath = path.posix.join(config.publicPath, config.assets.subDir)
 app.use(staticPath, express.static('./public'))
 
-const uri = `http://localhost:${port}`
+const uri = `http://${ip.address()}:${port}`
 
 devMiddleware.waitUntilValid(() => console.log(chalk.green(`> Listening at ${uri} \n`)))
 

@@ -1,4 +1,5 @@
 const fs = require('fs')
+const ip = require('ip')
 const opn = require('opn')
 const pug = require('pug')
 const path = require('path')
@@ -14,7 +15,7 @@ const Data = tools.readJSON(path.join(rootPath, 'data/compare.json'))
 tools.deleteEmptyProperty(Data)
 const reportView = viewFn(Data)
 
-const uri = 'http://localhost:5000'
+const uri = `http://${ip.address()}:5000`
 server.use('/static', express.static(path.join(rootPath, 'static')))
 server.get('*', (req, res) => {
   res.send(layout.replace('<div id="app"></div>', reportView))

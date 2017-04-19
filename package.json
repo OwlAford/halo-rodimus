@@ -1,7 +1,7 @@
 {
   "name": "react-halo",
   "version": "1.0.1",
-  "description": "A React Project",
+  "description": "A React Management System",
   "author": "OwlAford <zhangyh@belink.com>",
   "license": "MIT",
   "private": true,
@@ -67,6 +67,7 @@
     "fs": "^0.0.1-security",
     "function-bind": "^1.1.0",
     "html-webpack-plugin": "^2.28.0",
+    "ip": "^1.1.5",
     "less": "^2.7.2",
     "less-loader": "^4.0.2",
     "mkdirp": "^0.5.1",

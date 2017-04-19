@@ -1,3 +1,4 @@
+const ip = require('ip')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -14,7 +15,7 @@ Object.keys(baseWebpackConfig.entry).forEach(name => {
 module.exports = merge(baseWebpackConfig, {
   devtool: '#cheap-module-eval-source-map',
   output: {
-    publicPath: `http://localhost:${port}${config.publicPath}`
+    publicPath: `http://${ip.address()}:${port}${config.publicPath}`
   },
   plugins: [
     new webpack.DefinePlugin({
