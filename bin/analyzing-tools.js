@@ -184,7 +184,7 @@ exports.compare = opts => {
           }
           const oldSize = (oldItem.size / 1024).toFixed(3)
           const tarSize = (tarItem.size / 1024).toFixed(3)
-          const sizeDiff =((oldItem.size - tarItem.size) / 1024).toFixed(3)
+          const sizeDiff =((tarItem.size - oldItem.size) / 1024).toFixed(3)
           const sizeChange = {
             oldSize,
             tarSize,
